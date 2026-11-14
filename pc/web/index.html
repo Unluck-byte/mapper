@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Mapper</title>
+<style>
+  :root { --bg:#111317; --panel:#1b1e25cc; --line:#2c313b; --text:#e9ecef; --muted:#8b93a1;
+          --ok:#51cf66; --warn:#fcc419; --bad:#ff6b6b; --acc:#4dabf7; }
+  * { box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html, body { margin:0; height:100%; background:var(--bg); color:var(--text);
+               font:14px/1.3 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; overflow:hidden; }
+  canvas#map { position:fixed; inset:0; width:100%; height:100%; touch-action:none; cursor:crosshair; }
+  .bar { position:fixed; left:8px; right:8px; top:8px; display:flex; flex-wrap:wrap; gap:6px; pointer-events:none; }
+  .chip { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:5px 9px;
+          backdrop-filter:blur(6px); white-space:nowrap; }
+  .chip b { font-weight:600; }
+  .ok { color:var(--ok); } .warn { color:var(--warn); } .bad { color:var(--bad); }
+  .btns { position:fixed; right:8px; bottom:8px; display:flex; flex-direction:column; gap:8px; align-items:stretch; }
+  button { font:inherit; color:var(--text); background:#262a33; border:1px solid #3a404c; border-radius:10px;
+           padding:11px 14px; min-width:120px; cursor:pointer; }
+  button:active { transform:scale(.97); }
+  button.on { background:#1c3a5a; border-color:var(--acc); }
+  button.stop { background:#7a1f1f; border-color:#c92a2a; font-weight:700; font-size:16px; padding:16px; }
+  button.scan { background:#1e3a2a; border-color:#2f9e44; font-weight:600; }
+  .noise { background:#262a33; border:1px solid #3a404c; border-radius:10px; padding:6px 10px;
+           display:flex; flex-direction:column; gap:2px; font-size:12px; color:var(--muted); }
+  .noise b { color:var(--text); }
+  .noise input { width:100%; accent-color:var(--acc); margin:0; }
+  .small { display:flex; gap:6px; }
+  .small button { min-width:0; flex:1; padding:8px; font-size:12px; }
+  #joy { position:fixed; left:16px; bottom:16px; width:150px; height:150px; border-radius:50%;
+         background:#1b1e25aa; border:2px solid #3a404c; touch-action:none; }
+  #knob { position:absolute; width:60px; height:60px; border-radius:50%; background:#4dabf7aa;
+          border:2px solid #a5d8ff; left:45px; top:45px; pointer-events:none; }
+  #log { position:fixed; left:180px; bottom:8px; right:150px; max-height:96px; overflow:hidden;
+         font-size:12px; color:var(--muted); pointer-events:none; }
+  #log div { background:#111317aa; padding:1px 6px; border-radius:4px; margin-top:2px; width:max-content; max-width:100%; }
+  @media (max-width:600px) {
+    #log { left:8px; right:8px; bottom:176px; }
+    button { min-width:96px; padding:9px 10px; }
+    #joy { width:130px; height:130px; } #knob { left:35px; top:35px; }
+  }
+</style>
+</head>
+<body>
+<canvas id="map"></canvas>
+
+<div class="bar">
+  <div class="chip" id="c-link">нет связи</div>
+  <div class="chip" id="c-mode">—</div>
+  <div class="chip" id="c-bat">🔋 —</div>
+  <div class="chip" id="c-us">↑ — ↓ —</div>
+  <div class="chip" id="c-tof">TOF —</div>
+  <div class="chip" id="c-pose">x — y —</div>
+</div>
+
+<div id="joy"><div id="knob"></div></div>
+<div id="log"></div>
+
+<div class="btns">
+  <button class="stop" id="b-stop">СТОП</button>
+  <button class="scan" id="b-scan">Скан</button>
+  <button id="b-goto" class="on">Клик: ехать</button>
+  <button id="b-auto" class="on">Автоскан: вкл</button>
+  <button id="b-center">За машинкой</button>
+  <label class="noise" title="Стена, у которой рядом (15 см) меньше N других точек стены, считается помехой: не мешает маршруту и не рисуется. Карта не стирается — можно вернуть ползунком.">
+    <span>Помехи: <b id="noise-v">1</b></span>
+    <input type="range" id="noise" min="0" max="6" step="1" value="1">
+  </label>
+  <div class="small">
+    <button id="b-save">Сохр.</button>
+    <button id="b-load">Загр.</button>
+  </div>
+  <div class="small">
+    <button id="b-clear">Очистить</button>
+    <button id="b-zero">x,y = 0</button>
+  </div>
+</div>
+
+<script>
+"use strict";
+const MAX_V = 300, MAX_W = 1.6, R_MM = 140;
+const cv = document.getElementById("map"), ctx = cv.getContext("2d");
+let ws, tel = null, link = false, path = [], scanPts = [];
+let mapSize = 480, mapRes = 25;
+const mapCanvas = document.createElement("canvas");
+let view = { s: 0.12, cx: 0, cy: 0 };     // px на мм, центр вида в мм
+let follow = true, gotoMode = true, autoScan = true;
+
+// ---------------------------------------------------------------- связь
+function connect() {
+  ws = new WebSocket((location.protocol === "https:" ? "wss://" : "ws://") + location.host + "/ws");
+  ws.onmessage = e => onMsg(JSON.parse(e.data));
+  ws.onclose = () => { link = false; status(); setTimeout(connect, 1000); };
+}
+function send(m) { if (ws && ws.readyState === 1) ws.send(JSON.stringify(m)); }
+
+function onMsg(m) {
+  if (m.t === "tel") { tel = m; link = true; lastTel = performance.now(); status(); }
+  else if (m.t === "map") drawMapImage(m);
+  else if (m.t === "path") path = m.pts || [];
+  else if (m.t === "scanpts") scanPts = m.pts || [];
+  else if (m.t === "log") log(m.msg);
+  else if (m.t === "link") { link = m.ok; status(); }
+  else if (m.t === "cfg") { if (m.noise !== undefined) { $("noise").max = m.noise_max; $("noise").value = m.noise; $("noise-v").textContent = m.noise ? m.noise : "выкл"; }
+    autoScan = m.auto_scan; $("b-auto").textContent = "Автоскан: " + (autoScan ? "вкл" : "выкл"); $("b-auto").classList.toggle("on", autoScan); }
+}
+let lastTel = 0;
+setInterval(() => { if (link && performance.now() - lastTel > 2000) { link = false; status(); } }, 500);
+
+function log(s) {
+  const el = document.getElementById("log");
+  const d = document.createElement("div");
+  d.textContent = new Date().toLocaleTimeString() + "  " + s;
+  el.appendChild(d);
+  while (el.children.length > 5) el.removeChild(el.firstChild);
+}
+
+// ---------------------------------------------------------------- статус
+const MODES = { idle: "стоит", manual: "ручное", path: "едет по маршруту", turn: "поворот", scan: "СКАН", test: "тест" };
+const BLK = { front: "препятствие спереди", rear: "препятствие сзади", cliff: "ПРОПАСТЬ", bat: "батарея села", stall: "колёса упёрлись" };
+function chip(id, html, cls) { const e = document.getElementById(id); e.innerHTML = html; e.className = "chip " + (cls || ""); }
+function status() {
+  chip("c-link", link ? (tel && tel.sim ? "● симулятор" : "● машинка на связи") : "○ нет связи", link ? "ok" : "bad");
+  if (!tel) return;
+  const blk = tel.blk ? " · ⚠ " + (BLK[tel.blk] || tel.blk) : "";
+  chip("c-mode", "<b>" + (MODES[tel.mode] || tel.mode) + "</b>" + (tel.mode === "path" ? ` ${tel.wp}/${tel.wpn}` : "") + blk, tel.blk ? "warn" : "");
+  const v = tel.bat / 1000;
+  chip("c-bat", tel.bat ? `🔋 ${v.toFixed(2)} В` : "🔋 USB", !tel.bat ? "" : v < 9.8 ? "bad" : v < 10.6 ? "warn" : "ok");
+  const f = n => n >= 3000 ? "∞" : (n / 10).toFixed(0) + " см";
+  chip("c-us", `↑ ${f(tel.usf)}  ↓ ${f(tel.usr)}`, Math.min(tel.usf, tel.usr) < 200 ? "warn" : "");
+  chip("c-tof", tel.tofok ? `TOF ${tel.tof ? (tel.tof / 10).toFixed(1) + " см" : "—"}` : "TOF нет связи", tel.tofok ? "" : "bad");
+  chip("c-pose", `x ${(tel.x / 10).toFixed(0)} y ${(tel.y / 10).toFixed(0)} см · ${(tel.th * 57.2958).toFixed(0)}°` + (tel.imu ? "" : " · гироскоп?"), tel.imu ? "" : "warn");
+}
+
+// ---------------------------------------------------------------- карта
+function drawMapImage(m) {
+  mapSize = m.size; mapRes = m.res;
+  const raw = atob(m.data);
+  mapCanvas.width = mapCanvas.height = mapSize;
+  const c = mapCanvas.getContext("2d"), img = c.createImageData(mapSize, mapSize);
+  for (let r = 0; r < mapSize; r++) {
+    for (let col = 0; col < mapSize; col++) {
+      const v = raw.charCodeAt(r * mapSize + col);
+      // строки карты — y вверх; в картинке переворачиваем
+      const i = ((mapSize - 1 - r) * mapSize + col) * 4;
+      let R, G, B, A = 255;
+      if (v > 147) { const k = Math.min(1, (v - 147) / 60); R = 230; G = 236 - 120 * k; B = 245 - 200 * k; }   // стена
+      else if (v < 109) { const k = Math.min(1, (109 - v) / 80); R = 34 + 10 * k; G = 52 + 20 * k; B = 70 + 25 * k; }  // свободно
+      else { A = 0; R = G = B = 0; }                                                                         // неизвестно
+      img.data[i] = R; img.data[i + 1] = G; img.data[i + 2] = B; img.data[i + 3] = A;
+    }
+  }
+  c.putImageData(img, 0, 0);
+}
+
+function w2s(x, y) { return [cv.width / 2 + (x - view.cx) * view.s * dpr, cv.height / 2 - (y - view.cy) * view.s * dpr]; }
+function s2w(px, py) { return [view.cx + (px * dpr - cv.width / 2) / (view.s * dpr), view.cy - (py * dpr - cv.height / 2) / (view.s * dpr)]; }
+
+let dpr = 1;
+function resize() { dpr = window.devicePixelRatio || 1; cv.width = innerWidth * dpr; cv.height = innerHeight * dpr; }
+addEventListener("resize", resize); resize();
+
+function draw() {
+  if (follow && tel) { view.cx += (tel.x - view.cx) * 0.15; view.cy += (tel.y - view.cy) * 0.15; }
+  ctx.fillStyle = "#111317"; ctx.fillRect(0, 0, cv.width, cv.height);
+  const k = view.s * dpr;
+  // сетка 1 м
+  ctx.strokeStyle = "#1c2028"; ctx.lineWidth = 1;
+  const [wx0, wy1] = s2w(0, 0), [wx1, wy0] = s2w(innerWidth, innerHeight);
+  for (let x = Math.floor(wx0 / 1000) * 1000; x < wx1; x += 1000) { const [px] = w2s(x, 0); ctx.beginPath(); ctx.moveTo(px, 0); ctx.lineTo(px, cv.height); ctx.stroke(); }
+  for (let y = Math.floor(wy0 / 1000) * 1000; y < wy1; y += 1000) { const [, py] = w2s(0, y); ctx.beginPath(); ctx.moveTo(0, py); ctx.lineTo(cv.width, py); ctx.stroke(); }
+  // карта
+  const half = mapSize * mapRes / 2;
+  const [mx, my] = w2s(-half, half);
+  ctx.imageSmoothingEnabled = false;
+  ctx.drawImage(mapCanvas, mx, my, mapSize * mapRes * k, mapSize * mapRes * k);
+  // точки последнего скана
+  ctx.fillStyle = "#ff922b";
+  for (const p of scanPts) { const [px, py] = w2s(p[0], p[1]); ctx.fillRect(px - 2 * dpr, py - 2 * dpr, 4 * dpr, 4 * dpr); }
+  // маршрут
+  if (path.length > 1) {
+    ctx.strokeStyle = "#69db7c"; ctx.lineWidth = 3 * dpr; ctx.setLineDash([8 * dpr, 6 * dpr]);
+    ctx.beginPath(); path.forEach((p, i) => { const [px, py] = w2s(p[0], p[1]); i ? ctx.lineTo(px, py) : ctx.moveTo(px, py); }); ctx.stroke();
+    ctx.setLineDash([]);
+    const g = path[path.length - 1], [gx, gy] = w2s(g[0], g[1]);
+    ctx.fillStyle = "#69db7c"; ctx.beginPath(); ctx.arc(gx, gy, 7 * dpr, 0, 7); ctx.fill();
+  }
+  // машинка
+  if (tel) {
+    const [px, py] = w2s(tel.x, tel.y), r = R_MM * k;
+    ctx.save(); ctx.translate(px, py); ctx.rotate(-tel.th);
+    ctx.fillStyle = tel.blk ? "#c92a2a55" : "#4dabf733"; ctx.strokeStyle = tel.blk ? "#ff6b6b" : "#4dabf7"; ctx.lineWidth = 2 * dpr;
+    ctx.beginPath(); ctx.arc(0, 0, r, 0, 7); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = "#a5d8ff"; ctx.beginPath(); ctx.moveTo(r, 0); ctx.lineTo(-r * 0.5, r * 0.55); ctx.lineTo(-r * 0.5, -r * 0.55); ctx.closePath(); ctx.fill();
+    // луч TOF
+    if (tel.tof) {
+      const a = (tel.servo - 90) * Math.PI / 180, d = tel.tof * k, ox = 60 * k;
+      ctx.strokeStyle = "#ff922b88"; ctx.lineWidth = 1.5 * dpr;
+      ctx.beginPath(); ctx.moveTo(ox, 0); ctx.lineTo(ox + d * Math.cos(-a), d * Math.sin(-a)); ctx.stroke();
+    }
+    ctx.restore();
+    if (tel.gt) {   // истинное положение в симуляторе
+      const [gx, gy] = w2s(tel.gt[0], tel.gt[1]);
+      ctx.strokeStyle = "#ffffff44"; ctx.setLineDash([3, 3]); ctx.beginPath(); ctx.arc(gx, gy, r, 0, 7); ctx.stroke(); ctx.setLineDash([]);
+    }
+  }
+  // масштаб
+  ctx.fillStyle = "#8b93a1"; ctx.font = `${12 * dpr}px system-ui`;
+  ctx.fillText("клетка сетки — 1 м", 12 * dpr, cv.height - (innerWidth < 600 ? 190 : 175) * dpr);
+  requestAnimationFrame(draw);
+}
+requestAnimationFrame(draw);
+
+// ---------------------------------------------------------------- клик/перетаскивание/масштаб
+const ptrs = new Map();
+let dragStart = null, pinch0 = null;
+cv.addEventListener("pointerdown", e => {
+  cv.setPointerCapture(e.pointerId);
+  ptrs.set(e.pointerId, [e.clientX, e.clientY]);
+  if (ptrs.size === 1) dragStart = { x: e.clientX, y: e.clientY, cx: view.cx, cy: view.cy, moved: false };
+  if (ptrs.size === 2) { const [a, b] = [...ptrs.values()]; pinch0 = { d: Math.hypot(a[0] - b[0], a[1] - b[1]), s: view.s }; }
+});
+cv.addEventListener("pointermove", e => {
+  if (!ptrs.has(e.pointerId)) return;
+  ptrs.set(e.pointerId, [e.clientX, e.clientY]);
+  if (ptrs.size === 2 && pinch0) {
+    const [a, b] = [...ptrs.values()];
+    view.s = Math.max(0.02, Math.min(1.5, pinch0.s * Math.hypot(a[0] - b[0], a[1] - b[1]) / pinch0.d));
+    if (dragStart) dragStart.moved = true;
+  } else if (dragStart) {
+    const dx = e.clientX - dragStart.x, dy = e.clientY - dragStart.y;
+    if (Math.hypot(dx, dy) > 6) { dragStart.moved = true; follow = false; }
+    if (dragStart.moved) { view.cx = dragStart.cx - dx / view.s; view.cy = dragStart.cy + dy / view.s; }
+  }
+});
+cv.addEventListener("pointerup", e => {
+  ptrs.delete(e.pointerId);
+  if (ptrs.size < 2) pinch0 = null;
+  if (ptrs.size === 0 && dragStart) {
+    if (!dragStart.moved && gotoMode) {
+      const [x, y] = s2w(e.clientX, e.clientY);
+      send({ c: "goto", x: Math.round(x), y: Math.round(y) });
+      log(`еду в точку ${(x / 10).toFixed(0)}, ${(y / 10).toFixed(0)} см`);
+    }
+    dragStart = null;
+  }
+});
+cv.addEventListener("wheel", e => {
+  e.preventDefault();
+  const [wx, wy] = s2w(e.clientX, e.clientY);
+  view.s = Math.max(0.02, Math.min(1.5, view.s * (e.deltaY < 0 ? 1.15 : 1 / 1.15)));
+  const [nx, ny] = s2w(e.clientX, e.clientY);
+  view.cx += wx - nx; view.cy += wy - ny; follow = false;
+}, { passive: false });
+
+// ---------------------------------------------------------------- джойстик
+const joy = document.getElementById("joy"), knob = document.getElementById("knob");
+let joyVec = null;
+function joyMove(e) {
+  const r = joy.getBoundingClientRect(), R = r.width / 2;
+  let dx = e.clientX - (r.left + R), dy = e.clientY - (r.top + R);
+  const d = Math.hypot(dx, dy), lim = R - 20;
+  if (d > lim) { dx *= lim / d; dy *= lim / d; }
+  knob.style.left = (R - 30 + dx) + "px"; knob.style.top = (R - 30 + dy) + "px";
+  joyVec = [dx / lim, dy / lim];
+}
+joy.addEventListener("pointerdown", e => { joy.setPointerCapture(e.pointerId); joyMove(e); });
+joy.addEventListener("pointermove", e => { if (joyVec) joyMove(e); });
+function joyEnd() { joyVec = null; const R = joy.clientWidth / 2; knob.style.left = knob.style.top = (R - 30) + "px"; send({ c: "drive", v: 0, w: 0 }); }
+joy.addEventListener("pointerup", joyEnd);
+joy.addEventListener("pointercancel", joyEnd);
+
+// клавиатура: WASD / стрелки, пробел — стоп
+const keys = new Set();
+addEventListener("keydown", e => {
+  if (e.code === "Space") { send({ c: "stop" }); e.preventDefault(); return; }
+  keys.add(e.code);
+});
+addEventListener("keyup", e => { keys.delete(e.code); if (!keyVec()) send({ c: "drive", v: 0, w: 0 }); });
+function keyVec() {
+  let f = 0, t = 0;
+  if (keys.has("KeyW") || keys.has("ArrowUp")) f += 1;
+  if (keys.has("KeyS") || keys.has("ArrowDown")) f -= 1;
+  if (keys.has("KeyA") || keys.has("ArrowLeft")) t += 1;
+  if (keys.has("KeyD") || keys.has("ArrowRight")) t -= 1;
+  return f || t ? [f, t] : null;
+}
+setInterval(() => {
+  if (joyVec) {
+    const [x, y] = joyVec;
+    send({ c: "drive", v: Math.round(-y * MAX_V * (Math.abs(y) > 0.15 ? 1 : 0)), w: +(-x * MAX_W * (Math.abs(x) > 0.15 ? 1 : 0)).toFixed(2) });
+  } else {
+    const k = keyVec();
+    if (k) send({ c: "drive", v: k[0] * MAX_V * 0.7, w: k[1] * MAX_W * 0.6 });
+  }
+}, 100);
+
+// ---------------------------------------------------------------- кнопки
+const $ = id => document.getElementById(id);
+$("b-stop").onclick = () => send({ c: "stop" });
+$("b-scan").onclick = () => send({ c: "scan" });
+$("b-goto").onclick = () => { gotoMode = !gotoMode; $("b-goto").textContent = gotoMode ? "Клик: ехать" : "Клик: смотреть"; $("b-goto").classList.toggle("on", gotoMode); };
+$("b-center").onclick = () => { follow = true; };
+$("b-auto").onclick = () => send({ c: "auto_scan", on: !autoScan });
+$("noise").oninput = e => { const v = +e.target.value; $("noise-v").textContent = v ? v : "выкл"; send({ c: "noise", level: v }); };
+$("b-save").onclick = () => send({ c: "save_map" });
+$("b-load").onclick = () => send({ c: "load_map" });
+$("b-clear").onclick = () => { if (confirm("Очистить карту?")) send({ c: "clear_map" }); };
+$("b-zero").onclick = () => { if (confirm("Обнулить положение машинки (x=0, y=0, курс 0)?")) send({ c: "reset_pose" }); };
+
+connect();
+</script>
+</body>
+</html>

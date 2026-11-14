@@ -1,0 +1,15 @@
+# Автозапуск сервера mapper (служба пользователя systemd).
+#   cp ~/mapper/pc/mapper.service ~/.config/systemd/user/
+#   systemctl --user daemon-reload && systemctl --user enable --now mapper
+[Unit]
+Description=mapper — сервер SLAM-машинки (карта, маршруты, веб-интерфейс :8080)
+After=network-online.target
+
+[Service]
+WorkingDirectory=%h/mapper/pc
+ExecStart=%h/mapper/pc/.venv/bin/python -u -m mapper.server
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=default.target

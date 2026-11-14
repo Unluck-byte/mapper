@@ -1,0 +1,1111 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3300" height="2120" viewBox="0 0 3300 2120">
+<defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1d2129" stroke-width="1"/></pattern><linearGradient id="shield" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e9ecef"/><stop offset="0.5" stop-color="#adb5bd"/><stop offset="1" stop-color="#dee2e6"/></linearGradient><linearGradient id="can" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f3f5"/><stop offset="0.5" stop-color="#868e96"/><stop offset="1" stop-color="#ced4da"/></linearGradient><radialGradient id="lens" cx="0.4" cy="0.35" r="0.7"><stop offset="0" stop-color="#5c7cfa"/><stop offset="0.5" stop-color="#1c1e3a"/><stop offset="1" stop-color="#05060a"/></radialGradient><radialGradient id="ustx" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#495057"/><stop offset="0.6" stop-color="#ced4da"/><stop offset="1" stop-color="#f8f9fa"/></radialGradient></defs>
+<rect x="0" y="0" width="3300" height="2120" rx="0" fill="#14161c" stroke="none" stroke-width="1" />
+<rect x="0" y="0" width="3300" height="2120" rx="0" fill="url(#grid)" stroke="none" stroke-width="1" />
+<text x="40" y="62" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="40" fill="#f8f9fa" text-anchor="start" font-weight="bold">MAPPER — схема подключения SLAM-машинки</text>
+<text x="40" y="100" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="19" fill="#adb5bd" text-anchor="start" font-weight="normal">ESP32-S3-DevKitC-1 N16R8 · TOF400F на серве · 4× TT-мотор + энкодеры LM393 · MX1508 · MPU6050 · HC-SR04 ×2 · ИК пола · 3S 18650</text>
+<text x="40" y="132" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="17" fill="#868e96" text-anchor="start" font-weight="normal">Все GND — общие.  Сигналы нарисованы проводами, питание — цветными метками (3V3 / 5V / 7V / GND).  Номера на ESP = номера GPIO (подписи на плате).</text>
+<rect x="1260" y="200" width="340" height="1090" rx="16" fill="#0f1115" stroke="#3d4350" stroke-width="2" />
+<rect x="1300" y="214" width="260" height="162" rx="4" fill="#1d2430" stroke="#3d4350" stroke-width="1" />
+<polyline points="1320,226 1342,252 1364,226 1386,252 1408,226 1430,252 1452,226 1474,252 1496,226 1518,252 1540,226" fill="none" stroke="#c9a227" stroke-width="3"/>
+<rect x="1312" y="264" width="236" height="104" rx="3" fill="url(#shield)" stroke="#868e96" stroke-width="1" />
+<text x="1430.0" y="304" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="17" fill="#212529" text-anchor="middle" font-weight="bold">ESP32-S3-WROOM-1</text>
+<text x="1430.0" y="328" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#343a40" text-anchor="middle" font-weight="normal">N16R8 · 16 МБ flash · 8 МБ PSRAM</text>
+<text x="1430.0" y="352" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="11" fill="#495057" text-anchor="middle" font-weight="normal" font-style="italic">антенна — вверх, не закрывать металлом</text>
+<rect x="1300" y="1212" width="34" height="24" rx="3" fill="#adb5bd" stroke="#495057" stroke-width="1" />
+<circle cx="1317" cy="1224" r="7" fill="#212529" stroke="none" stroke-width="1"/>
+<text x="1317" y="1206" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="11" fill="#adb5bd" text-anchor="middle" font-weight="normal">BOOT</text>
+<rect x="1526" y="1212" width="34" height="24" rx="3" fill="#adb5bd" stroke="#495057" stroke-width="1" />
+<circle cx="1543" cy="1224" r="7" fill="#212529" stroke="none" stroke-width="1"/>
+<text x="1543" y="1206" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="11" fill="#adb5bd" text-anchor="middle" font-weight="normal">RST</text>
+<rect x="1421.0" y="1214" width="18" height="18" rx="2" fill="#f8f9fa" stroke="#495057" stroke-width="1" />
+<text x="1430.0" y="1206" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="11" fill="#adb5bd" text-anchor="middle" font-weight="normal">RGB·48</text>
+<rect x="1330" y="1260" width="70" height="34" rx="10" fill="#ced4da" stroke="#495057" stroke-width="1.5" />
+<rect x="1342" y="1272" width="46" height="10" rx="5" fill="#343a40" stroke="none" stroke-width="1" />
+<rect x="1460" y="1260" width="70" height="34" rx="10" fill="#ced4da" stroke="#495057" stroke-width="1.5" />
+<rect x="1472" y="1272" width="46" height="10" rx="5" fill="#343a40" stroke="none" stroke-width="1" />
+<text x="1365" y="1314" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#868e96" text-anchor="middle" font-weight="normal">USB-C</text>
+<text x="1495" y="1314" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#868e96" text-anchor="middle" font-weight="normal">USB-C</text>
+<text x="1430.0" y="1340" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="22" fill="#f8f9fa" text-anchor="middle" font-weight="bold">ESP32-S3-DevKitC-1</text>
+<rect x="1276.0" y="384.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<circle cx="1282" cy="390" r="10" fill="none" stroke="#fcc419" stroke-width="2"/>
+<text x="1300" y="395" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#f8f9fa" text-anchor="start" font-weight="bold">3V3</text>
+<text x="1340" y="395" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#fcc419" text-anchor="start" font-weight="bold">3V3 → датчики</text>
+<rect x="1276.0" y="422.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<circle cx="1282" cy="428" r="10" fill="none" stroke="#fcc419" stroke-width="2"/>
+<text x="1300" y="433" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#f8f9fa" text-anchor="start" font-weight="bold">3V3</text>
+<text x="1340" y="433" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#fcc419" text-anchor="start" font-weight="bold">3V3 → датчики</text>
+<rect x="1276.0" y="460.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="1300" y="471" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#6c757d" text-anchor="start" font-weight="bold">RST</text>
+<rect x="1276.0" y="498.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<circle cx="1282" cy="504" r="10" fill="none" stroke="#ff922b" stroke-width="2"/>
+<text x="1300" y="509" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#f8f9fa" text-anchor="start" font-weight="bold">4</text>
+<text x="1340" y="509" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#ff922b" text-anchor="start" font-weight="bold">SERVO</text>
+<rect x="1276.0" y="536.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<circle cx="1282" cy="542" r="10" fill="none" stroke="#f1f3f5" stroke-width="2"/>
+<text x="1300" y="547" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#f8f9fa" text-anchor="start" font-weight="bold">5</text>
+<text x="1340" y="547" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#f1f3f5" text-anchor="start" font-weight="bold">TOF → RXD</text>
+<rect x="1276.0" y="574.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<circle cx="1282" cy="580" r="10" fill="none" stroke="#51cf66" stroke-width="2"/>
+<text x="1300" y="585" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#f8f9fa" text-anchor="start" font-weight="bold">6</text>
+<text x="1340" y="585" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#51cf66" text-anchor="start" font-weight="bold">TOF ← TXD</text>
+<rect x="1276.0" y="612.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<circle cx="1282" cy="618" r="10" fill="none" stroke="#ff8787" stroke-width="2"/>
+<text x="1300" y="623" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#f8f9fa" text-anchor="start" font-weight="bold">7</text>
+<text x="1340" y="623" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#ff8787" text-anchor="start" font-weight="bold">US-F ECHO</text>
+<rect x="1276.0" y="650.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<circle cx="1282" cy="656" r="10" fill="none" stroke="#ffd43b" stroke-width="2"/>
+<text x="1300" y="661" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#f8f9fa" text-anchor="start" font-weight="bold">15</text>
+<text x="1340" y="661" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#ffd43b" text-anchor="start" font-weight="bold">US-F TRIG</text>
+<rect x="1276.0" y="688.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<circle cx="1282" cy="694" r="10" fill="none" stroke="#f06595" stroke-width="2"/>
+<text x="1300" y="699" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#f8f9fa" text-anchor="start" font-weight="bold">16</text>
+<text x="1340" y="699" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#f06595" text-anchor="start" font-weight="bold">US-R ECHO</text>
+<rect x="1276.0" y="726.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<circle cx="1282" cy="732" r="10" fill="none" stroke="#c0eb75" stroke-width="2"/>
+<text x="1300" y="737" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#f8f9fa" text-anchor="start" font-weight="bold">17</text>
+<text x="1340" y="737" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#c0eb75" text-anchor="start" font-weight="bold">US-R TRIG</text>
+<rect x="1276.0" y="764.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<circle cx="1282" cy="770" r="10" fill="none" stroke="#63e6be" stroke-width="2"/>
+<text x="1300" y="775" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#f8f9fa" text-anchor="start" font-weight="bold">18</text>
+<text x="1340" y="775" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#63e6be" text-anchor="start" font-weight="bold">ИК ПОЛ</text>
+<rect x="1276.0" y="802.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<circle cx="1282" cy="808" r="10" fill="none" stroke="#f783ac" stroke-width="2"/>
+<text x="1300" y="813" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#f8f9fa" text-anchor="start" font-weight="bold">8</text>
+<text x="1340" y="813" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#f783ac" text-anchor="start" font-weight="bold">MX IN3</text>
+<rect x="1276.0" y="840.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="1300" y="851" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#6c757d" text-anchor="start" font-weight="bold">3</text>
+<text x="1340" y="851" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#5c636a" text-anchor="start" font-weight="normal">не трогать</text>
+<rect x="1276.0" y="878.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="1300" y="889" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#6c757d" text-anchor="start" font-weight="bold">46</text>
+<text x="1340" y="889" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#5c636a" text-anchor="start" font-weight="normal">не трогать</text>
+<rect x="1276.0" y="916.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<circle cx="1282" cy="922" r="10" fill="none" stroke="#748ffc" stroke-width="2"/>
+<text x="1300" y="927" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#f8f9fa" text-anchor="start" font-weight="bold">9</text>
+<text x="1340" y="927" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#748ffc" text-anchor="start" font-weight="bold">MX IN4</text>
+<rect x="1276.0" y="954.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<circle cx="1282" cy="960" r="10" fill="none" stroke="#da77f2" stroke-width="2"/>
+<text x="1300" y="965" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#f8f9fa" text-anchor="start" font-weight="bold">10</text>
+<text x="1340" y="965" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#da77f2" text-anchor="start" font-weight="bold">MX IN1</text>
+<rect x="1276.0" y="992.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<circle cx="1282" cy="998" r="10" fill="none" stroke="#9775fa" stroke-width="2"/>
+<text x="1300" y="1003" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#f8f9fa" text-anchor="start" font-weight="bold">11</text>
+<text x="1340" y="1003" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#9775fa" text-anchor="start" font-weight="bold">MX IN2</text>
+<rect x="1276.0" y="1030.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="1300" y="1041" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#6c757d" text-anchor="start" font-weight="bold">12</text>
+<text x="1340" y="1041" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#5c636a" text-anchor="start" font-weight="normal">свободен</text>
+<rect x="1276.0" y="1068.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<circle cx="1282" cy="1074" r="10" fill="none" stroke="#3bc9db" stroke-width="2"/>
+<text x="1300" y="1079" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#f8f9fa" text-anchor="start" font-weight="bold">13</text>
+<text x="1340" y="1079" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#3bc9db" text-anchor="start" font-weight="bold">ENC FL</text>
+<rect x="1276.0" y="1106.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<circle cx="1282" cy="1112" r="10" fill="none" stroke="#a5d8ff" stroke-width="2"/>
+<text x="1300" y="1117" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#f8f9fa" text-anchor="start" font-weight="bold">14</text>
+<text x="1340" y="1117" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#a5d8ff" text-anchor="start" font-weight="bold">ENC RL</text>
+<rect x="1276.0" y="1144.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<circle cx="1282" cy="1150" r="10" fill="none" stroke="#ff6b6b" stroke-width="2"/>
+<text x="1300" y="1155" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#f8f9fa" text-anchor="start" font-weight="bold">5V</text>
+<text x="1340" y="1155" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#ff6b6b" text-anchor="start" font-weight="bold">5V ВХОД</text>
+<rect x="1276.0" y="1182.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<circle cx="1282" cy="1188" r="10" fill="none" stroke="#adb5bd" stroke-width="2"/>
+<text x="1300" y="1193" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#f8f9fa" text-anchor="start" font-weight="bold">GND</text>
+<text x="1340" y="1193" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#adb5bd" text-anchor="start" font-weight="bold">GND</text>
+<rect x="1572.0" y="384.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<circle cx="1578" cy="390" r="10" fill="none" stroke="#adb5bd" stroke-width="2"/>
+<text x="1560" y="395" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#f8f9fa" text-anchor="end" font-weight="bold">GND</text>
+<text x="1520" y="395" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#adb5bd" text-anchor="end" font-weight="bold">GND</text>
+<rect x="1572.0" y="422.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="1560" y="433" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#6c757d" text-anchor="end" font-weight="bold">TX</text>
+<text x="1520" y="433" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#5c636a" text-anchor="end" font-weight="normal">UART0</text>
+<rect x="1572.0" y="460.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="1560" y="471" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#6c757d" text-anchor="end" font-weight="bold">RX</text>
+<text x="1520" y="471" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#5c636a" text-anchor="end" font-weight="normal">UART0</text>
+<rect x="1572.0" y="498.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<circle cx="1578" cy="504" r="10" fill="none" stroke="#d0bfff" stroke-width="2"/>
+<text x="1560" y="509" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#f8f9fa" text-anchor="end" font-weight="bold">1</text>
+<text x="1520" y="509" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#d0bfff" text-anchor="end" font-weight="bold">BAT АЦП·опц.</text>
+<rect x="1572.0" y="536.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<circle cx="1578" cy="542" r="10" fill="none" stroke="#38d9a9" stroke-width="2"/>
+<text x="1560" y="547" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#f8f9fa" text-anchor="end" font-weight="bold">2</text>
+<text x="1520" y="547" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#38d9a9" text-anchor="end" font-weight="bold">ENC FR</text>
+<rect x="1572.0" y="574.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<circle cx="1578" cy="580" r="10" fill="none" stroke="#339af0" stroke-width="2"/>
+<text x="1560" y="585" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#f8f9fa" text-anchor="end" font-weight="bold">42</text>
+<text x="1520" y="585" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#339af0" text-anchor="end" font-weight="bold">MPU SCL</text>
+<rect x="1572.0" y="612.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<circle cx="1578" cy="618" r="10" fill="none" stroke="#ffe066" stroke-width="2"/>
+<text x="1560" y="623" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#f8f9fa" text-anchor="end" font-weight="bold">41</text>
+<text x="1520" y="623" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#ffe066" text-anchor="end" font-weight="bold">MPU SDA</text>
+<rect x="1572.0" y="650.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="1560" y="661" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#6c757d" text-anchor="end" font-weight="bold">40</text>
+<rect x="1572.0" y="688.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="1560" y="699" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#6c757d" text-anchor="end" font-weight="bold">39</text>
+<rect x="1572.0" y="726.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="1560" y="737" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#6c757d" text-anchor="end" font-weight="bold">38</text>
+<rect x="1572.0" y="764.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="1560" y="775" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#6c757d" text-anchor="end" font-weight="bold">37</text>
+<text x="1520" y="775" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#5c636a" text-anchor="end" font-weight="normal">PSRAM·нет</text>
+<rect x="1572.0" y="802.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="1560" y="813" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#6c757d" text-anchor="end" font-weight="bold">36</text>
+<text x="1520" y="813" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#5c636a" text-anchor="end" font-weight="normal">PSRAM·нет</text>
+<rect x="1572.0" y="840.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="1560" y="851" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#6c757d" text-anchor="end" font-weight="bold">35</text>
+<text x="1520" y="851" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#5c636a" text-anchor="end" font-weight="normal">PSRAM·нет</text>
+<rect x="1572.0" y="878.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="1560" y="889" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#6c757d" text-anchor="end" font-weight="bold">0</text>
+<text x="1520" y="889" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#5c636a" text-anchor="end" font-weight="normal">BOOT·нет</text>
+<rect x="1572.0" y="916.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="1560" y="927" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#6c757d" text-anchor="end" font-weight="bold">45</text>
+<text x="1520" y="927" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#5c636a" text-anchor="end" font-weight="normal">не трогать</text>
+<rect x="1572.0" y="954.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<circle cx="1578" cy="960" r="10" fill="none" stroke="#868e96" stroke-width="2"/>
+<text x="1560" y="965" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#f8f9fa" text-anchor="end" font-weight="bold">48</text>
+<text x="1520" y="965" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#868e96" text-anchor="end" font-weight="bold">RGB LED</text>
+<rect x="1572.0" y="992.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="1560" y="1003" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#6c757d" text-anchor="end" font-weight="bold">47</text>
+<rect x="1572.0" y="1030.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<circle cx="1578" cy="1036" r="10" fill="none" stroke="#96f2d7" stroke-width="2"/>
+<text x="1560" y="1041" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#f8f9fa" text-anchor="end" font-weight="bold">21</text>
+<text x="1520" y="1041" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#96f2d7" text-anchor="end" font-weight="bold">ENC RR</text>
+<rect x="1572.0" y="1068.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="1560" y="1079" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#6c757d" text-anchor="end" font-weight="bold">20</text>
+<text x="1520" y="1079" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#5c636a" text-anchor="end" font-weight="normal">USB D+</text>
+<rect x="1572.0" y="1106.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="1560" y="1117" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#6c757d" text-anchor="end" font-weight="bold">19</text>
+<text x="1520" y="1117" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#5c636a" text-anchor="end" font-weight="normal">USB D−</text>
+<rect x="1572.0" y="1144.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<circle cx="1578" cy="1150" r="10" fill="none" stroke="#adb5bd" stroke-width="2"/>
+<text x="1560" y="1155" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#f8f9fa" text-anchor="end" font-weight="bold">GND</text>
+<text x="1520" y="1155" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#adb5bd" text-anchor="end" font-weight="bold">GND</text>
+<rect x="1572.0" y="1182.0" width="12" height="12" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<circle cx="1578" cy="1188" r="10" fill="none" stroke="#adb5bd" stroke-width="2"/>
+<text x="1560" y="1193" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="15" fill="#f8f9fa" text-anchor="end" font-weight="bold">GND</text>
+<text x="1520" y="1193" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#adb5bd" text-anchor="end" font-weight="bold">GND</text>
+<path d="M 1282 390 L 1236 390" fill="none" stroke="#0a0b0f" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 1282 390 L 1236 390" fill="none" stroke="#fcc419" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1282" cy="390" r="3.5" fill="#fcc419" stroke="#0a0b0f" stroke-width="1"/>
+<rect x="1141" y="379" width="95" height="22" rx="11" fill="#101217" stroke="#fcc419" stroke-width="2" />
+<text x="1188.5" y="395" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#fcc419" text-anchor="middle" font-weight="bold">3V3 выход</text>
+<path d="M 1282 1150 L 1236 1150" fill="none" stroke="#0a0b0f" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 1282 1150 L 1236 1150" fill="none" stroke="#ff6b6b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1282" cy="1150" r="3.5" fill="#ff6b6b" stroke="#0a0b0f" stroke-width="1"/>
+<rect x="1141" y="1139" width="95" height="22" rx="11" fill="#101217" stroke="#ff6b6b" stroke-width="2" />
+<text x="1188.5" y="1155" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#ff6b6b" text-anchor="middle" font-weight="bold">5V ← SS34</text>
+<path d="M 1282 1188 L 1252 1188" fill="none" stroke="#0a0b0f" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 1282 1188 L 1252 1188" fill="none" stroke="#adb5bd" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1282" cy="1188" r="3.5" fill="#adb5bd" stroke="#0a0b0f" stroke-width="1"/>
+<line x1="1252" y1="1188" x2="1252" y2="1196" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="1243" y1="1196" x2="1261" y2="1196" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="1246" y1="1200" x2="1258" y2="1200" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="1249" y1="1204" x2="1255" y2="1204" stroke="#adb5bd" stroke-width="2.5"/>
+<path d="M 1578 390 L 1608 390" fill="none" stroke="#0a0b0f" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 1578 390 L 1608 390" fill="none" stroke="#adb5bd" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1578" cy="390" r="3.5" fill="#adb5bd" stroke="#0a0b0f" stroke-width="1"/>
+<line x1="1608" y1="390" x2="1608" y2="398" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="1599" y1="398" x2="1617" y2="398" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="1602" y1="402" x2="1614" y2="402" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="1605" y1="406" x2="1611" y2="406" stroke="#adb5bd" stroke-width="2.5"/>
+<rect x="70" y="186" width="26" height="14" rx="3" fill="#1971c2" stroke="#0b3d6b" stroke-width="1" />
+<rect x="246" y="186" width="26" height="14" rx="3" fill="#1971c2" stroke="#0b3d6b" stroke-width="1" />
+<circle cx="83" cy="193" r="4" fill="#14161c" stroke="none" stroke-width="1"/>
+<circle cx="259" cy="193" r="4" fill="#14161c" stroke="none" stroke-width="1"/>
+<rect x="90" y="180" width="162" height="74" rx="6" fill="#1c7ed6" stroke="#0b3d6b" stroke-width="2" />
+<circle cx="128" cy="210" r="18" fill="#f8f9fa" stroke="#adb5bd" stroke-width="1"/>
+<path d="M 120 210 L 122 166 Q 128 158 134 166 L 136 210 Z" fill="#f8f9fa" stroke="#adb5bd"/>
+<circle cx="128" cy="210" r="5" fill="#adb5bd" stroke="none" stroke-width="1"/>
+<text x="195" y="216" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="20" fill="#f8f9fa" text-anchor="middle" font-weight="bold">SG90</text>
+<text x="195" y="236" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#d0ebff" text-anchor="middle" font-weight="normal">серва 180°</text>
+<path d="M 252 202 L 306 202" fill="none" stroke="#0a0b0f" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 252 202 L 306 202" fill="none" stroke="#7c4a1e" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 252 224 L 306 224" fill="none" stroke="#0a0b0f" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 252 224 L 306 224" fill="none" stroke="#e03131" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 252 246 L 306 246" fill="none" stroke="#0a0b0f" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 252 246 L 306 246" fill="none" stroke="#ff922b" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="306" y="190" width="18" height="68" rx="2" fill="#212529" stroke="#495057" stroke-width="1" />
+<rect x="326.0" y="198.0" width="8" height="8" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<rect x="326.0" y="220.0" width="8" height="8" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<rect x="326.0" y="242.0" width="8" height="8" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<path d="M 330 202 L 370 202" fill="none" stroke="#0a0b0f" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 330 202 L 370 202" fill="none" stroke="#7c4a1e" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="330" cy="202" r="3.5" fill="#7c4a1e" stroke="#0a0b0f" stroke-width="1"/>
+<line x1="370" y1="202" x2="370" y2="210" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="361" y1="210" x2="379" y2="210" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="364" y1="214" x2="376" y2="214" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="367" y1="218" x2="373" y2="218" stroke="#adb5bd" stroke-width="2.5"/>
+<path d="M 330 224 L 370 224" fill="none" stroke="#0a0b0f" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 330 224 L 370 224" fill="none" stroke="#ff6b6b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="330" cy="224" r="3.5" fill="#ff6b6b" stroke="#0a0b0f" stroke-width="1"/>
+<rect x="382" y="213" width="32" height="22" rx="11" fill="#101217" stroke="#ff6b6b" stroke-width="2" />
+<text x="398.0" y="229" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#ff6b6b" text-anchor="middle" font-weight="bold">5V</text>
+<text x="300" y="284" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#ffa8a8" text-anchor="start" font-weight="normal" font-style="italic">+ 1000 мкФ между 5V и GND у сервы</text>
+<rect x="70" y="330" width="240" height="190" rx="18" fill="#1b1d22" stroke="#495057" stroke-width="2" />
+<circle cx="92" cy="352" r="13" fill="#c9a227" stroke="none" stroke-width="1"/>
+<circle cx="92" cy="352" r="8" fill="#14161c" stroke="none" stroke-width="1"/>
+<circle cx="288" cy="352" r="13" fill="#c9a227" stroke="none" stroke-width="1"/>
+<circle cx="288" cy="352" r="8" fill="#14161c" stroke="none" stroke-width="1"/>
+<circle cx="92" cy="498" r="13" fill="#c9a227" stroke="none" stroke-width="1"/>
+<circle cx="92" cy="498" r="8" fill="#14161c" stroke="none" stroke-width="1"/>
+<circle cx="288" cy="498" r="13" fill="#c9a227" stroke="none" stroke-width="1"/>
+<circle cx="288" cy="498" r="8" fill="#14161c" stroke="none" stroke-width="1"/>
+<ellipse cx="190" cy="418" rx="52" ry="66" fill="#0b0c10" stroke="#343a40" stroke-width="3"/>
+<circle cx="174" cy="400" r="14" fill="url(#lens)" stroke="none" stroke-width="1"/>
+<circle cx="206" cy="400" r="14" fill="url(#lens)" stroke="none" stroke-width="1"/>
+<rect x="170" y="434" width="40" height="22" rx="3" fill="#212529" stroke="#495057" stroke-width="1" />
+<text x="190" y="320" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="15" fill="#f8f9fa" text-anchor="middle" font-weight="bold">TOF400F (VL53L1X)</text>
+<rect x="110.0" y="519.0" width="10" height="10" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="119" y="512" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="11" fill="#f8f9fa" text-anchor="start" font-weight="bold" transform="rotate(-90 119 512)">TXD</text>
+<rect x="140.0" y="519.0" width="10" height="10" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="149" y="512" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="11" fill="#f8f9fa" text-anchor="start" font-weight="bold" transform="rotate(-90 149 512)">RXD</text>
+<rect x="170.0" y="519.0" width="10" height="10" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="179" y="512" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="11" fill="#f8f9fa" text-anchor="start" font-weight="bold" transform="rotate(-90 179 512)">SCL</text>
+<rect x="200.0" y="519.0" width="10" height="10" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="209" y="512" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="11" fill="#f8f9fa" text-anchor="start" font-weight="bold" transform="rotate(-90 209 512)">SDA</text>
+<rect x="230.0" y="519.0" width="10" height="10" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="239" y="512" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="11" fill="#f8f9fa" text-anchor="start" font-weight="bold" transform="rotate(-90 239 512)">GND</text>
+<rect x="260.0" y="519.0" width="10" height="10" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="269" y="512" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="11" fill="#f8f9fa" text-anchor="start" font-weight="bold" transform="rotate(-90 269 512)">VIN</text>
+<line x1="169" y1="534" x2="181" y2="546" stroke="#fa5252" stroke-width="2.5"/>
+<line x1="181" y1="534" x2="169" y2="546" stroke="#fa5252" stroke-width="2.5"/>
+<line x1="199" y1="534" x2="211" y2="546" stroke="#fa5252" stroke-width="2.5"/>
+<line x1="211" y1="534" x2="199" y2="546" stroke="#fa5252" stroke-width="2.5"/>
+<path d="M 235 524 L 235 538" fill="none" stroke="#0a0b0f" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 235 524 L 235 538" fill="none" stroke="#adb5bd" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="235" cy="524" r="3.5" fill="#adb5bd" stroke="#0a0b0f" stroke-width="1"/>
+<line x1="235" y1="538" x2="235" y2="546" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="226" y1="546" x2="244" y2="546" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="229" y1="550" x2="241" y2="550" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="232" y1="554" x2="238" y2="554" stroke="#adb5bd" stroke-width="2.5"/>
+<path d="M 265 524 L 265 540" fill="none" stroke="#0a0b0f" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 265 524 L 265 540" fill="none" stroke="#fcc419" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="265" cy="524" r="3.5" fill="#fcc419" stroke="#0a0b0f" stroke-width="1"/>
+<rect x="254.5" y="541" width="41" height="22" rx="11" fill="#101217" stroke="#fcc419" stroke-width="2" />
+<text x="275.0" y="557" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#fcc419" text-anchor="middle" font-weight="bold">3V3</text>
+<text x="320" y="370" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#adb5bd" text-anchor="start" font-weight="normal" font-style="italic">крепится на качалку</text>
+<text x="320" y="388" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#adb5bd" text-anchor="start" font-weight="normal" font-style="italic">сервы, выше всего</text>
+<text x="320" y="406" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#adb5bd" text-anchor="start" font-weight="normal" font-style="italic">на машинке</text>
+<text x="320" y="440" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#fa5252" text-anchor="start" font-weight="bold">SDA/SCL — НЕ</text>
+<text x="320" y="458" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#fa5252" text-anchor="start" font-weight="bold">подключать</text>
+<rect x="70" y="660" width="240" height="104" rx="6" fill="#1864ab" stroke="#0b3d6b" stroke-width="2" />
+<circle cx="128" cy="710" r="38" fill="url(#ustx)" stroke="#adb5bd" stroke-width="2"/>
+<circle cx="128" cy="710" r="26" fill="#343a40" stroke="none" stroke-width="1"/>
+<circle cx="128" cy="710" r="6" fill="none" stroke="#495057" stroke-width="1"/>
+<circle cx="128" cy="710" r="11" fill="none" stroke="#495057" stroke-width="1"/>
+<circle cx="128" cy="710" r="16" fill="none" stroke="#495057" stroke-width="1"/>
+<circle cx="128" cy="710" r="21" fill="none" stroke="#495057" stroke-width="1"/>
+<circle cx="252" cy="710" r="38" fill="url(#ustx)" stroke="#adb5bd" stroke-width="2"/>
+<circle cx="252" cy="710" r="26" fill="#343a40" stroke="none" stroke-width="1"/>
+<circle cx="252" cy="710" r="6" fill="none" stroke="#495057" stroke-width="1"/>
+<circle cx="252" cy="710" r="11" fill="none" stroke="#495057" stroke-width="1"/>
+<circle cx="252" cy="710" r="16" fill="none" stroke="#495057" stroke-width="1"/>
+<circle cx="252" cy="710" r="21" fill="none" stroke="#495057" stroke-width="1"/>
+<text x="190" y="684" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#f8f9fa" text-anchor="middle" font-weight="bold">HC-SR04</text>
+<text x="190" y="650" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="15" fill="#f8f9fa" text-anchor="middle" font-weight="bold">Ультразвук ПЕРЕД</text>
+<rect x="149.0" y="763.0" width="10" height="10" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="158" y="758" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="start" font-weight="bold" transform="rotate(-90 158 758)">VCC</text>
+<rect x="173.0" y="763.0" width="10" height="10" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="182" y="758" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="start" font-weight="bold" transform="rotate(-90 182 758)">TRIG</text>
+<rect x="197.0" y="763.0" width="10" height="10" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="206" y="758" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="start" font-weight="bold" transform="rotate(-90 206 758)">ECHO</text>
+<rect x="221.0" y="763.0" width="10" height="10" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="230" y="758" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="start" font-weight="bold" transform="rotate(-90 230 758)">GND</text>
+<path d="M 154 768 L 154 782" fill="none" stroke="#0a0b0f" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 154 768 L 154 782" fill="none" stroke="#ff6b6b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="154" cy="768" r="3.5" fill="#ff6b6b" stroke="#0a0b0f" stroke-width="1"/>
+<rect x="138.0" y="783" width="32" height="22" rx="11" fill="#101217" stroke="#ff6b6b" stroke-width="2" />
+<text x="154.0" y="799" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#ff6b6b" text-anchor="middle" font-weight="bold">5V</text>
+<path d="M 226 768 L 226 774" fill="none" stroke="#0a0b0f" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 226 768 L 226 774" fill="none" stroke="#adb5bd" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="226" cy="768" r="3.5" fill="#adb5bd" stroke="#0a0b0f" stroke-width="1"/>
+<line x1="226" y1="774" x2="226" y2="782" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="217" y1="782" x2="235" y2="782" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="220" y1="786" x2="232" y2="786" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="223" y1="790" x2="229" y2="790" stroke="#adb5bd" stroke-width="2.5"/>
+<path d="M 202 768 L 202 792 L 360 792" fill="none" stroke="#0a0b0f" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 202 768 L 202 792 L 360 792" fill="none" stroke="#ff8787" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="202" cy="768" r="4.0" fill="#ff8787" stroke="#0a0b0f" stroke-width="1"/>
+<path d="M 178 768 L 178 812 L 360 812" fill="none" stroke="#0a0b0f" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 178 768 L 178 812 L 360 812" fill="none" stroke="#ffd43b" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="178" cy="768" r="4.0" fill="#ffd43b" stroke="#0a0b0f" stroke-width="1"/>
+<rect x="360" y="776" width="80" height="52" rx="4" fill="#0c5c3c" stroke="#2b8a3e" stroke-width="2" />
+<text x="400" y="770" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="11" fill="#b2f2bb" text-anchor="middle" font-weight="bold">HW-209 1-2</text>
+<rect x="356.0" y="788.0" width="8" height="8" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<rect x="436.0" y="788.0" width="8" height="8" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="366" y="796" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="start" font-weight="bold">B1</text>
+<text x="434" y="796" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="end" font-weight="bold">A1</text>
+<rect x="356.0" y="808.0" width="8" height="8" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<rect x="436.0" y="808.0" width="8" height="8" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="366" y="816" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="start" font-weight="bold">B2</text>
+<text x="434" y="816" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="end" font-weight="bold">A2</text>
+<rect x="70" y="880" width="240" height="104" rx="6" fill="#1864ab" stroke="#0b3d6b" stroke-width="2" />
+<circle cx="128" cy="930" r="38" fill="url(#ustx)" stroke="#adb5bd" stroke-width="2"/>
+<circle cx="128" cy="930" r="26" fill="#343a40" stroke="none" stroke-width="1"/>
+<circle cx="128" cy="930" r="6" fill="none" stroke="#495057" stroke-width="1"/>
+<circle cx="128" cy="930" r="11" fill="none" stroke="#495057" stroke-width="1"/>
+<circle cx="128" cy="930" r="16" fill="none" stroke="#495057" stroke-width="1"/>
+<circle cx="128" cy="930" r="21" fill="none" stroke="#495057" stroke-width="1"/>
+<circle cx="252" cy="930" r="38" fill="url(#ustx)" stroke="#adb5bd" stroke-width="2"/>
+<circle cx="252" cy="930" r="26" fill="#343a40" stroke="none" stroke-width="1"/>
+<circle cx="252" cy="930" r="6" fill="none" stroke="#495057" stroke-width="1"/>
+<circle cx="252" cy="930" r="11" fill="none" stroke="#495057" stroke-width="1"/>
+<circle cx="252" cy="930" r="16" fill="none" stroke="#495057" stroke-width="1"/>
+<circle cx="252" cy="930" r="21" fill="none" stroke="#495057" stroke-width="1"/>
+<text x="190" y="904" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#f8f9fa" text-anchor="middle" font-weight="bold">HC-SR04</text>
+<text x="190" y="870" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="15" fill="#f8f9fa" text-anchor="middle" font-weight="bold">Ультразвук ЗАД</text>
+<rect x="149.0" y="983.0" width="10" height="10" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="158" y="978" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="start" font-weight="bold" transform="rotate(-90 158 978)">VCC</text>
+<rect x="173.0" y="983.0" width="10" height="10" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="182" y="978" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="start" font-weight="bold" transform="rotate(-90 182 978)">TRIG</text>
+<rect x="197.0" y="983.0" width="10" height="10" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="206" y="978" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="start" font-weight="bold" transform="rotate(-90 206 978)">ECHO</text>
+<rect x="221.0" y="983.0" width="10" height="10" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="230" y="978" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="start" font-weight="bold" transform="rotate(-90 230 978)">GND</text>
+<path d="M 154 988 L 154 1002" fill="none" stroke="#0a0b0f" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 154 988 L 154 1002" fill="none" stroke="#ff6b6b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="154" cy="988" r="3.5" fill="#ff6b6b" stroke="#0a0b0f" stroke-width="1"/>
+<rect x="138.0" y="1003" width="32" height="22" rx="11" fill="#101217" stroke="#ff6b6b" stroke-width="2" />
+<text x="154.0" y="1019" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#ff6b6b" text-anchor="middle" font-weight="bold">5V</text>
+<path d="M 226 988 L 226 994" fill="none" stroke="#0a0b0f" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 226 988 L 226 994" fill="none" stroke="#adb5bd" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="226" cy="988" r="3.5" fill="#adb5bd" stroke="#0a0b0f" stroke-width="1"/>
+<line x1="226" y1="994" x2="226" y2="1002" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="217" y1="1002" x2="235" y2="1002" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="220" y1="1006" x2="232" y2="1006" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="223" y1="1010" x2="229" y2="1010" stroke="#adb5bd" stroke-width="2.5"/>
+<path d="M 202 988 L 202 1012 L 360 1012" fill="none" stroke="#0a0b0f" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 202 988 L 202 1012 L 360 1012" fill="none" stroke="#f06595" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="202" cy="988" r="4.0" fill="#f06595" stroke="#0a0b0f" stroke-width="1"/>
+<path d="M 178 988 L 178 1032 L 360 1032" fill="none" stroke="#0a0b0f" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 178 988 L 178 1032 L 360 1032" fill="none" stroke="#c0eb75" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="178" cy="988" r="4.0" fill="#c0eb75" stroke="#0a0b0f" stroke-width="1"/>
+<rect x="360" y="996" width="80" height="52" rx="4" fill="#0c5c3c" stroke="#2b8a3e" stroke-width="2" />
+<text x="400" y="990" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="11" fill="#b2f2bb" text-anchor="middle" font-weight="bold">HW-209 3-4</text>
+<rect x="356.0" y="1008.0" width="8" height="8" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<rect x="436.0" y="1008.0" width="8" height="8" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="366" y="1016" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="start" font-weight="bold">B3</text>
+<text x="434" y="1016" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="end" font-weight="bold">A3</text>
+<rect x="356.0" y="1028.0" width="8" height="8" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<rect x="436.0" y="1028.0" width="8" height="8" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="366" y="1036" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="start" font-weight="bold">B4</text>
+<text x="434" y="1036" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="end" font-weight="bold">A4</text>
+<text x="70" y="1166" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#b2f2bb" text-anchor="start" font-weight="normal" font-style="italic">HW-209 (один модуль): LV/AVCC → 3V3, HV/BVCC → 5V, GND → общая · B — датчики, A — ESP, канал один</text>
+<rect x="70" y="1062" width="240" height="64" rx="6" fill="#1b1d22" stroke="#495057" stroke-width="2" />
+<circle cx="92" cy="1082" r="11" fill="#212529" stroke="#495057" stroke-width="1"/>
+<circle cx="92" cy="1108" r="11" fill="#e9ecef" stroke="#adb5bd" stroke-width="1"/>
+<rect x="130" y="1080" width="26" height="26" rx="3" fill="#1c7ed6" stroke="#0b3d6b" stroke-width="1" />
+<circle cx="143" cy="1093" r="7" fill="#f8f9fa" stroke="none" stroke-width="1"/>
+<text x="198" y="1090" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="14" fill="#f8f9fa" text-anchor="middle" font-weight="bold">ИК пола</text>
+<text x="198" y="1108" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="10" fill="#adb5bd" text-anchor="middle" font-weight="normal">FC-51/TCRT5000</text>
+<rect x="305.5" y="1071.5" width="9" height="9" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="298" y="1080" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="end" font-weight="bold">OUT</text>
+<rect x="305.5" y="1089.5" width="9" height="9" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="298" y="1098" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="end" font-weight="bold">GND</text>
+<rect x="305.5" y="1107.5" width="9" height="9" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="298" y="1116" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="end" font-weight="bold">VCC</text>
+<path d="M 310 1094 L 336 1094" fill="none" stroke="#0a0b0f" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 310 1094 L 336 1094" fill="none" stroke="#adb5bd" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="310" cy="1094" r="3.5" fill="#adb5bd" stroke="#0a0b0f" stroke-width="1"/>
+<line x1="336" y1="1094" x2="336" y2="1102" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="327" y1="1102" x2="345" y2="1102" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="330" y1="1106" x2="342" y2="1106" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="333" y1="1110" x2="339" y2="1110" stroke="#adb5bd" stroke-width="2.5"/>
+<path d="M 310 1112 L 356 1112" fill="none" stroke="#0a0b0f" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 310 1112 L 356 1112" fill="none" stroke="#fcc419" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="310" cy="1112" r="3.5" fill="#fcc419" stroke="#0a0b0f" stroke-width="1"/>
+<rect x="356" y="1101" width="41" height="22" rx="11" fill="#101217" stroke="#fcc419" stroke-width="2" />
+<text x="376.5" y="1117" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#fcc419" text-anchor="middle" font-weight="bold">3V3</text>
+<text x="70" y="1146" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#fab005" text-anchor="start" font-weight="normal" font-style="italic">смотрит в пол, 1–2 см над ним, перед колёсами · подписи сверить с платой</text>
+<rect x="140" y="1200" width="160" height="108" rx="6" fill="#c92a2a" stroke="#7a1414" stroke-width="2" />
+<rect x="190" y="1230" width="52" height="44" rx="2" fill="#212529" stroke="#495057" stroke-width="1" />
+<text x="216" y="1258" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="11" fill="#adb5bd" text-anchor="middle" font-weight="bold">MX1508</text>
+<text x="220" y="1190" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#f8f9fa" text-anchor="middle" font-weight="bold">MX1508 — драйвер моторов</text>
+<rect x="295.5" y="1211.5" width="9" height="9" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="290" y="1220" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="end" font-weight="bold">IN1</text>
+<rect x="295.5" y="1233.5" width="9" height="9" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="290" y="1242" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="end" font-weight="bold">IN2</text>
+<rect x="295.5" y="1255.5" width="9" height="9" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="290" y="1264" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="end" font-weight="bold">IN3</text>
+<rect x="295.5" y="1277.5" width="9" height="9" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="290" y="1286" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="end" font-weight="bold">IN4</text>
+<rect x="135.0" y="1217.0" width="10" height="10" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="150" y="1226" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="start" font-weight="bold">A1</text>
+<rect x="135.0" y="1245.0" width="10" height="10" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="150" y="1254" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="start" font-weight="bold">A2</text>
+<rect x="247.0" y="1303.0" width="10" height="10" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="256" y="1300" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="start" font-weight="bold" transform="rotate(-90 256 1300)">B1</text>
+<rect x="275.0" y="1303.0" width="10" height="10" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="284" y="1300" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="start" font-weight="bold" transform="rotate(-90 284 1300)">B2</text>
+<rect x="159.0" y="1303.0" width="10" height="10" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="164" y="1298" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="14" fill="#f8f9fa" text-anchor="middle" font-weight="bold">+</text>
+<rect x="187.0" y="1303.0" width="10" height="10" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="192" y="1298" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="14" fill="#f8f9fa" text-anchor="middle" font-weight="bold">−</text>
+<path d="M 164 1308 L 164 1326" fill="none" stroke="#0a0b0f" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 164 1308 L 164 1326" fill="none" stroke="#fd7e14" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="164" cy="1308" r="3.5" fill="#fd7e14" stroke="#0a0b0f" stroke-width="1"/>
+<rect x="148.0" y="1327" width="32" height="22" rx="11" fill="#101217" stroke="#fd7e14" stroke-width="2" />
+<text x="164.0" y="1343" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#fd7e14" text-anchor="middle" font-weight="bold">9V</text>
+<path d="M 192 1308 L 192 1318" fill="none" stroke="#0a0b0f" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 192 1308 L 192 1318" fill="none" stroke="#adb5bd" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="192" cy="1308" r="3.5" fill="#adb5bd" stroke="#0a0b0f" stroke-width="1"/>
+<line x1="192" y1="1318" x2="192" y2="1326" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="183" y1="1326" x2="201" y2="1326" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="186" y1="1330" x2="198" y2="1330" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="189" y1="1334" x2="195" y2="1334" stroke="#adb5bd" stroke-width="2.5"/>
+<rect x="120" y="1420" width="520" height="570" rx="24" fill="#1a1d24" stroke="#495057" stroke-width="3" />
+<text x="380.0" y="1695.0" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="18" fill="#495057" text-anchor="middle" font-weight="bold">ШАССИ (вид сверху)</text>
+<text x="380.0" y="1719.0" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="16" fill="#495057" text-anchor="middle" font-weight="normal">▲ перед</text>
+<rect x="92" y="1418" width="32" height="104" rx="8" fill="#212529" stroke="#495057" stroke-width="2" />
+<line x1="94" y1="1424.0" x2="122" y2="1424.0" stroke="#343a40" stroke-width="2"/>
+<line x1="94" y1="1435.5" x2="122" y2="1435.5" stroke="#343a40" stroke-width="2"/>
+<line x1="94" y1="1447.0" x2="122" y2="1447.0" stroke="#343a40" stroke-width="2"/>
+<line x1="94" y1="1458.5" x2="122" y2="1458.5" stroke="#343a40" stroke-width="2"/>
+<line x1="94" y1="1470.0" x2="122" y2="1470.0" stroke="#343a40" stroke-width="2"/>
+<line x1="94" y1="1481.5" x2="122" y2="1481.5" stroke="#343a40" stroke-width="2"/>
+<line x1="94" y1="1493.0" x2="122" y2="1493.0" stroke="#343a40" stroke-width="2"/>
+<line x1="94" y1="1504.5" x2="122" y2="1504.5" stroke="#343a40" stroke-width="2"/>
+<line x1="94" y1="1516.0" x2="122" y2="1516.0" stroke="#343a40" stroke-width="2"/>
+<rect x="125" y="1448" width="80" height="44" rx="4" fill="#fcc419" stroke="#e67700" stroke-width="2" />
+<circle cx="165.0" cy="1470" r="7" fill="#f8f9fa" stroke="#adb5bd" stroke-width="1"/>
+<rect x="135" y="1418" width="60" height="30" rx="6" fill="url(#can)" stroke="#868e96" stroke-width="1" />
+<rect x="147" y="1414" width="8" height="8" rx="0" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<rect x="175" y="1414" width="8" height="8" rx="0" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<ellipse cx="165.0" cy="1404" rx="9" ry="7" fill="#f08c00" stroke="#a35200"/>
+<line x1="151" y1="1418" x2="157.0" y2="1404" stroke="#ced4da" stroke-width="1.5"/>
+<line x1="179" y1="1418" x2="173.0" y2="1404" stroke="#ced4da" stroke-width="1.5"/>
+<ellipse cx="214" cy="1470" rx="7" ry="30" fill="#212529" stroke="#868e96" stroke-width="1.5"/>
+<line x1="209" y1="1446" x2="219" y2="1446" stroke="#adb5bd" stroke-width="1"/>
+<line x1="209" y1="1452" x2="219" y2="1452" stroke="#adb5bd" stroke-width="1"/>
+<line x1="209" y1="1458" x2="219" y2="1458" stroke="#adb5bd" stroke-width="1"/>
+<line x1="209" y1="1464" x2="219" y2="1464" stroke="#adb5bd" stroke-width="1"/>
+<line x1="209" y1="1470" x2="219" y2="1470" stroke="#adb5bd" stroke-width="1"/>
+<line x1="209" y1="1476" x2="219" y2="1476" stroke="#adb5bd" stroke-width="1"/>
+<line x1="209" y1="1482" x2="219" y2="1482" stroke="#adb5bd" stroke-width="1"/>
+<line x1="209" y1="1488" x2="219" y2="1488" stroke="#adb5bd" stroke-width="1"/>
+<line x1="209" y1="1494" x2="219" y2="1494" stroke="#adb5bd" stroke-width="1"/>
+<rect x="226" y="1439" width="78" height="62" rx="4" fill="#1864ab" stroke="#0b3d6b" stroke-width="2" />
+<rect x="226" y="1453" width="14" height="28" rx="0" fill="#212529" stroke="#495057" stroke-width="1" />
+<text x="271.0" y="1461" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="11" fill="#d0ebff" text-anchor="middle" font-weight="bold">LM393</text>
+<rect x="239.0" y="1497.0" width="8" height="8" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="243" y="1491" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="9" fill="#f8f9fa" text-anchor="middle" font-weight="bold">VCC</text>
+<rect x="261.0" y="1497.0" width="8" height="8" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="265" y="1491" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="9" fill="#f8f9fa" text-anchor="middle" font-weight="bold">GND</text>
+<rect x="283.0" y="1497.0" width="8" height="8" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="287" y="1491" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="9" fill="#f8f9fa" text-anchor="middle" font-weight="bold">DO</text>
+<path d="M 243 1501 L 243 1515 L 225 1515" fill="none" stroke="#0a0b0f" stroke-width="5.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 243 1501 L 243 1515 L 225 1515" fill="none" stroke="#fcc419" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="243" cy="1501" r="3.25" fill="#fcc419" stroke="#0a0b0f" stroke-width="1"/>
+<rect x="184" y="1504" width="41" height="22" rx="11" fill="#101217" stroke="#fcc419" stroke-width="2" />
+<text x="204.5" y="1520" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#fcc419" text-anchor="middle" font-weight="bold">3V3</text>
+<path d="M 265 1501 L 265 1507" fill="none" stroke="#0a0b0f" stroke-width="5.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 265 1501 L 265 1507" fill="none" stroke="#adb5bd" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="265" cy="1501" r="3.25" fill="#adb5bd" stroke="#0a0b0f" stroke-width="1"/>
+<line x1="265" y1="1507" x2="265" y2="1515" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="256" y1="1515" x2="274" y2="1515" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="259" y1="1519" x2="271" y2="1519" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="262" y1="1523" x2="268" y2="1523" stroke="#adb5bd" stroke-width="2.5"/>
+<text x="265.0" y="1431" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="14" fill="#f8f9fa" text-anchor="middle" font-weight="bold">FL</text>
+<rect x="638" y="1418" width="32" height="104" rx="8" fill="#212529" stroke="#495057" stroke-width="2" />
+<line x1="640" y1="1424.0" x2="668" y2="1424.0" stroke="#343a40" stroke-width="2"/>
+<line x1="640" y1="1435.5" x2="668" y2="1435.5" stroke="#343a40" stroke-width="2"/>
+<line x1="640" y1="1447.0" x2="668" y2="1447.0" stroke="#343a40" stroke-width="2"/>
+<line x1="640" y1="1458.5" x2="668" y2="1458.5" stroke="#343a40" stroke-width="2"/>
+<line x1="640" y1="1470.0" x2="668" y2="1470.0" stroke="#343a40" stroke-width="2"/>
+<line x1="640" y1="1481.5" x2="668" y2="1481.5" stroke="#343a40" stroke-width="2"/>
+<line x1="640" y1="1493.0" x2="668" y2="1493.0" stroke="#343a40" stroke-width="2"/>
+<line x1="640" y1="1504.5" x2="668" y2="1504.5" stroke="#343a40" stroke-width="2"/>
+<line x1="640" y1="1516.0" x2="668" y2="1516.0" stroke="#343a40" stroke-width="2"/>
+<rect x="555" y="1448" width="80" height="44" rx="4" fill="#fcc419" stroke="#e67700" stroke-width="2" />
+<circle cx="595.0" cy="1470" r="7" fill="#f8f9fa" stroke="#adb5bd" stroke-width="1"/>
+<rect x="565" y="1418" width="60" height="30" rx="6" fill="url(#can)" stroke="#868e96" stroke-width="1" />
+<rect x="577" y="1414" width="8" height="8" rx="0" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<rect x="605" y="1414" width="8" height="8" rx="0" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<ellipse cx="595.0" cy="1404" rx="9" ry="7" fill="#f08c00" stroke="#a35200"/>
+<line x1="581" y1="1418" x2="587.0" y2="1404" stroke="#ced4da" stroke-width="1.5"/>
+<line x1="609" y1="1418" x2="603.0" y2="1404" stroke="#ced4da" stroke-width="1.5"/>
+<ellipse cx="546" cy="1470" rx="7" ry="30" fill="#212529" stroke="#868e96" stroke-width="1.5"/>
+<line x1="541" y1="1446" x2="551" y2="1446" stroke="#adb5bd" stroke-width="1"/>
+<line x1="541" y1="1452" x2="551" y2="1452" stroke="#adb5bd" stroke-width="1"/>
+<line x1="541" y1="1458" x2="551" y2="1458" stroke="#adb5bd" stroke-width="1"/>
+<line x1="541" y1="1464" x2="551" y2="1464" stroke="#adb5bd" stroke-width="1"/>
+<line x1="541" y1="1470" x2="551" y2="1470" stroke="#adb5bd" stroke-width="1"/>
+<line x1="541" y1="1476" x2="551" y2="1476" stroke="#adb5bd" stroke-width="1"/>
+<line x1="541" y1="1482" x2="551" y2="1482" stroke="#adb5bd" stroke-width="1"/>
+<line x1="541" y1="1488" x2="551" y2="1488" stroke="#adb5bd" stroke-width="1"/>
+<line x1="541" y1="1494" x2="551" y2="1494" stroke="#adb5bd" stroke-width="1"/>
+<rect x="460" y="1439" width="78" height="62" rx="4" fill="#1864ab" stroke="#0b3d6b" stroke-width="2" />
+<rect x="524" y="1453" width="14" height="28" rx="0" fill="#212529" stroke="#495057" stroke-width="1" />
+<text x="493.0" y="1461" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="11" fill="#d0ebff" text-anchor="middle" font-weight="bold">LM393</text>
+<rect x="473.0" y="1497.0" width="8" height="8" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="477" y="1491" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="9" fill="#f8f9fa" text-anchor="middle" font-weight="bold">VCC</text>
+<rect x="495.0" y="1497.0" width="8" height="8" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="499" y="1491" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="9" fill="#f8f9fa" text-anchor="middle" font-weight="bold">GND</text>
+<rect x="517.0" y="1497.0" width="8" height="8" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="521" y="1491" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="9" fill="#f8f9fa" text-anchor="middle" font-weight="bold">DO</text>
+<path d="M 477 1501 L 477 1515 L 459 1515" fill="none" stroke="#0a0b0f" stroke-width="5.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 477 1501 L 477 1515 L 459 1515" fill="none" stroke="#fcc419" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="477" cy="1501" r="3.25" fill="#fcc419" stroke="#0a0b0f" stroke-width="1"/>
+<rect x="418" y="1504" width="41" height="22" rx="11" fill="#101217" stroke="#fcc419" stroke-width="2" />
+<text x="438.5" y="1520" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#fcc419" text-anchor="middle" font-weight="bold">3V3</text>
+<path d="M 499 1501 L 499 1507" fill="none" stroke="#0a0b0f" stroke-width="5.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 499 1501 L 499 1507" fill="none" stroke="#adb5bd" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="499" cy="1501" r="3.25" fill="#adb5bd" stroke="#0a0b0f" stroke-width="1"/>
+<line x1="499" y1="1507" x2="499" y2="1515" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="490" y1="1515" x2="508" y2="1515" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="493" y1="1519" x2="505" y2="1519" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="496" y1="1523" x2="502" y2="1523" stroke="#adb5bd" stroke-width="2.5"/>
+<text x="499.0" y="1431" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="14" fill="#f8f9fa" text-anchor="middle" font-weight="bold">FR</text>
+<rect x="92" y="1888" width="32" height="104" rx="8" fill="#212529" stroke="#495057" stroke-width="2" />
+<line x1="94" y1="1894.0" x2="122" y2="1894.0" stroke="#343a40" stroke-width="2"/>
+<line x1="94" y1="1905.5" x2="122" y2="1905.5" stroke="#343a40" stroke-width="2"/>
+<line x1="94" y1="1917.0" x2="122" y2="1917.0" stroke="#343a40" stroke-width="2"/>
+<line x1="94" y1="1928.5" x2="122" y2="1928.5" stroke="#343a40" stroke-width="2"/>
+<line x1="94" y1="1940.0" x2="122" y2="1940.0" stroke="#343a40" stroke-width="2"/>
+<line x1="94" y1="1951.5" x2="122" y2="1951.5" stroke="#343a40" stroke-width="2"/>
+<line x1="94" y1="1963.0" x2="122" y2="1963.0" stroke="#343a40" stroke-width="2"/>
+<line x1="94" y1="1974.5" x2="122" y2="1974.5" stroke="#343a40" stroke-width="2"/>
+<line x1="94" y1="1986.0" x2="122" y2="1986.0" stroke="#343a40" stroke-width="2"/>
+<rect x="125" y="1918" width="80" height="44" rx="4" fill="#fcc419" stroke="#e67700" stroke-width="2" />
+<circle cx="165.0" cy="1940" r="7" fill="#f8f9fa" stroke="#adb5bd" stroke-width="1"/>
+<rect x="135" y="1962" width="60" height="30" rx="6" fill="url(#can)" stroke="#868e96" stroke-width="1" />
+<rect x="147" y="1988" width="8" height="8" rx="0" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<rect x="175" y="1988" width="8" height="8" rx="0" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<ellipse cx="165.0" cy="2006" rx="9" ry="7" fill="#f08c00" stroke="#a35200"/>
+<line x1="151" y1="1992" x2="157.0" y2="2006" stroke="#ced4da" stroke-width="1.5"/>
+<line x1="179" y1="1992" x2="173.0" y2="2006" stroke="#ced4da" stroke-width="1.5"/>
+<ellipse cx="214" cy="1940" rx="7" ry="30" fill="#212529" stroke="#868e96" stroke-width="1.5"/>
+<line x1="209" y1="1916" x2="219" y2="1916" stroke="#adb5bd" stroke-width="1"/>
+<line x1="209" y1="1922" x2="219" y2="1922" stroke="#adb5bd" stroke-width="1"/>
+<line x1="209" y1="1928" x2="219" y2="1928" stroke="#adb5bd" stroke-width="1"/>
+<line x1="209" y1="1934" x2="219" y2="1934" stroke="#adb5bd" stroke-width="1"/>
+<line x1="209" y1="1940" x2="219" y2="1940" stroke="#adb5bd" stroke-width="1"/>
+<line x1="209" y1="1946" x2="219" y2="1946" stroke="#adb5bd" stroke-width="1"/>
+<line x1="209" y1="1952" x2="219" y2="1952" stroke="#adb5bd" stroke-width="1"/>
+<line x1="209" y1="1958" x2="219" y2="1958" stroke="#adb5bd" stroke-width="1"/>
+<line x1="209" y1="1964" x2="219" y2="1964" stroke="#adb5bd" stroke-width="1"/>
+<rect x="226" y="1909" width="78" height="62" rx="4" fill="#1864ab" stroke="#0b3d6b" stroke-width="2" />
+<rect x="226" y="1923" width="14" height="28" rx="0" fill="#212529" stroke="#495057" stroke-width="1" />
+<text x="271.0" y="1961" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="11" fill="#d0ebff" text-anchor="middle" font-weight="bold">LM393</text>
+<rect x="239.0" y="1905.0" width="8" height="8" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="243" y="1927" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="9" fill="#f8f9fa" text-anchor="middle" font-weight="bold">VCC</text>
+<rect x="261.0" y="1905.0" width="8" height="8" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="265" y="1927" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="9" fill="#f8f9fa" text-anchor="middle" font-weight="bold">GND</text>
+<rect x="283.0" y="1905.0" width="8" height="8" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="287" y="1927" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="9" fill="#f8f9fa" text-anchor="middle" font-weight="bold">DO</text>
+<path d="M 243 1909 L 243 1895 L 225 1895" fill="none" stroke="#0a0b0f" stroke-width="5.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 243 1909 L 243 1895 L 225 1895" fill="none" stroke="#fcc419" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="243" cy="1909" r="3.25" fill="#fcc419" stroke="#0a0b0f" stroke-width="1"/>
+<rect x="184" y="1884" width="41" height="22" rx="11" fill="#101217" stroke="#fcc419" stroke-width="2" />
+<text x="204.5" y="1900" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#fcc419" text-anchor="middle" font-weight="bold">3V3</text>
+<path d="M 265 1909 L 265 1903" fill="none" stroke="#0a0b0f" stroke-width="5.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 265 1909 L 265 1903" fill="none" stroke="#adb5bd" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="265" cy="1909" r="3.25" fill="#adb5bd" stroke="#0a0b0f" stroke-width="1"/>
+<line x1="265" y1="1903" x2="265" y2="1895" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="256" y1="1895" x2="274" y2="1895" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="259" y1="1891" x2="271" y2="1891" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="262" y1="1887" x2="268" y2="1887" stroke="#adb5bd" stroke-width="2.5"/>
+<text x="265.0" y="1989" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="14" fill="#f8f9fa" text-anchor="middle" font-weight="bold">RL</text>
+<rect x="638" y="1888" width="32" height="104" rx="8" fill="#212529" stroke="#495057" stroke-width="2" />
+<line x1="640" y1="1894.0" x2="668" y2="1894.0" stroke="#343a40" stroke-width="2"/>
+<line x1="640" y1="1905.5" x2="668" y2="1905.5" stroke="#343a40" stroke-width="2"/>
+<line x1="640" y1="1917.0" x2="668" y2="1917.0" stroke="#343a40" stroke-width="2"/>
+<line x1="640" y1="1928.5" x2="668" y2="1928.5" stroke="#343a40" stroke-width="2"/>
+<line x1="640" y1="1940.0" x2="668" y2="1940.0" stroke="#343a40" stroke-width="2"/>
+<line x1="640" y1="1951.5" x2="668" y2="1951.5" stroke="#343a40" stroke-width="2"/>
+<line x1="640" y1="1963.0" x2="668" y2="1963.0" stroke="#343a40" stroke-width="2"/>
+<line x1="640" y1="1974.5" x2="668" y2="1974.5" stroke="#343a40" stroke-width="2"/>
+<line x1="640" y1="1986.0" x2="668" y2="1986.0" stroke="#343a40" stroke-width="2"/>
+<rect x="555" y="1918" width="80" height="44" rx="4" fill="#fcc419" stroke="#e67700" stroke-width="2" />
+<circle cx="595.0" cy="1940" r="7" fill="#f8f9fa" stroke="#adb5bd" stroke-width="1"/>
+<rect x="565" y="1962" width="60" height="30" rx="6" fill="url(#can)" stroke="#868e96" stroke-width="1" />
+<rect x="577" y="1988" width="8" height="8" rx="0" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<rect x="605" y="1988" width="8" height="8" rx="0" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<ellipse cx="595.0" cy="2006" rx="9" ry="7" fill="#f08c00" stroke="#a35200"/>
+<line x1="581" y1="1992" x2="587.0" y2="2006" stroke="#ced4da" stroke-width="1.5"/>
+<line x1="609" y1="1992" x2="603.0" y2="2006" stroke="#ced4da" stroke-width="1.5"/>
+<ellipse cx="546" cy="1940" rx="7" ry="30" fill="#212529" stroke="#868e96" stroke-width="1.5"/>
+<line x1="541" y1="1916" x2="551" y2="1916" stroke="#adb5bd" stroke-width="1"/>
+<line x1="541" y1="1922" x2="551" y2="1922" stroke="#adb5bd" stroke-width="1"/>
+<line x1="541" y1="1928" x2="551" y2="1928" stroke="#adb5bd" stroke-width="1"/>
+<line x1="541" y1="1934" x2="551" y2="1934" stroke="#adb5bd" stroke-width="1"/>
+<line x1="541" y1="1940" x2="551" y2="1940" stroke="#adb5bd" stroke-width="1"/>
+<line x1="541" y1="1946" x2="551" y2="1946" stroke="#adb5bd" stroke-width="1"/>
+<line x1="541" y1="1952" x2="551" y2="1952" stroke="#adb5bd" stroke-width="1"/>
+<line x1="541" y1="1958" x2="551" y2="1958" stroke="#adb5bd" stroke-width="1"/>
+<line x1="541" y1="1964" x2="551" y2="1964" stroke="#adb5bd" stroke-width="1"/>
+<rect x="460" y="1909" width="78" height="62" rx="4" fill="#1864ab" stroke="#0b3d6b" stroke-width="2" />
+<rect x="524" y="1923" width="14" height="28" rx="0" fill="#212529" stroke="#495057" stroke-width="1" />
+<text x="493.0" y="1961" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="11" fill="#d0ebff" text-anchor="middle" font-weight="bold">LM393</text>
+<rect x="473.0" y="1905.0" width="8" height="8" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="477" y="1927" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="9" fill="#f8f9fa" text-anchor="middle" font-weight="bold">VCC</text>
+<rect x="495.0" y="1905.0" width="8" height="8" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="499" y="1927" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="9" fill="#f8f9fa" text-anchor="middle" font-weight="bold">GND</text>
+<rect x="517.0" y="1905.0" width="8" height="8" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="521" y="1927" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="9" fill="#f8f9fa" text-anchor="middle" font-weight="bold">DO</text>
+<path d="M 477 1909 L 477 1895 L 459 1895" fill="none" stroke="#0a0b0f" stroke-width="5.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 477 1909 L 477 1895 L 459 1895" fill="none" stroke="#fcc419" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="477" cy="1909" r="3.25" fill="#fcc419" stroke="#0a0b0f" stroke-width="1"/>
+<rect x="418" y="1884" width="41" height="22" rx="11" fill="#101217" stroke="#fcc419" stroke-width="2" />
+<text x="438.5" y="1900" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#fcc419" text-anchor="middle" font-weight="bold">3V3</text>
+<path d="M 499 1909 L 499 1903" fill="none" stroke="#0a0b0f" stroke-width="5.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 499 1909 L 499 1903" fill="none" stroke="#adb5bd" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="499" cy="1909" r="3.25" fill="#adb5bd" stroke="#0a0b0f" stroke-width="1"/>
+<line x1="499" y1="1903" x2="499" y2="1895" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="490" y1="1895" x2="508" y2="1895" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="493" y1="1891" x2="505" y2="1891" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="496" y1="1887" x2="502" y2="1887" stroke="#adb5bd" stroke-width="2.5"/>
+<text x="499.0" y="1989" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="14" fill="#f8f9fa" text-anchor="middle" font-weight="bold">RR</text>
+<path d="M 140 1222 L 78 1222 L 78 1392 L 179 1392 L 179 1418" fill="none" stroke="#0a0b0f" stroke-width="6.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 140 1222 L 78 1222 L 78 1392 L 179 1392 L 179 1418" fill="none" stroke="#e03131" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="140" cy="1222" r="3.75" fill="#e03131" stroke="#0a0b0f" stroke-width="1"/>
+<circle cx="179" cy="1418" r="3.75" fill="#e03131" stroke="#0a0b0f" stroke-width="1"/>
+<path d="M 140 1250 L 64 1250 L 64 1402 L 151 1402 L 151 1418" fill="none" stroke="#9aa0a6" stroke-width="6.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 140 1250 L 64 1250 L 64 1402 L 151 1402 L 151 1418" fill="none" stroke="#212529" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="140" cy="1250" r="3.75" fill="#212529" stroke="#9aa0a6" stroke-width="1"/>
+<circle cx="151" cy="1418" r="3.75" fill="#212529" stroke="#9aa0a6" stroke-width="1"/>
+<path d="M 78 1392 L 78 2010 L 179 2010 L 179 1992" fill="none" stroke="#0a0b0f" stroke-width="6.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 78 1392 L 78 2010 L 179 2010 L 179 1992" fill="none" stroke="#e03131" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="179" cy="1992" r="3.75" fill="#e03131" stroke="#0a0b0f" stroke-width="1"/>
+<circle cx="78" cy="1392" r="5" fill="#e03131" stroke="#0a0b0f" stroke-width="1.5"/>
+<path d="M 64 1402 L 64 2024 L 151 2024 L 151 1992" fill="none" stroke="#9aa0a6" stroke-width="6.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 64 1402 L 64 2024 L 151 2024 L 151 1992" fill="none" stroke="#212529" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="151" cy="1992" r="3.75" fill="#212529" stroke="#9aa0a6" stroke-width="1"/>
+<circle cx="64" cy="1402" r="5" fill="#868e96" stroke="#0a0b0f" stroke-width="1.5"/>
+<path d="M 252 1308 L 252 1382 L 581 1382 L 581 1418" fill="none" stroke="#0a0b0f" stroke-width="6.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 252 1308 L 252 1382 L 581 1382 L 581 1418" fill="none" stroke="#e03131" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="252" cy="1308" r="3.75" fill="#e03131" stroke="#0a0b0f" stroke-width="1"/>
+<circle cx="581" cy="1418" r="3.75" fill="#e03131" stroke="#0a0b0f" stroke-width="1"/>
+<path d="M 280 1308 L 280 1372 L 609 1372 L 609 1418" fill="none" stroke="#9aa0a6" stroke-width="6.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 280 1308 L 280 1372 L 609 1372 L 609 1418" fill="none" stroke="#212529" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="280" cy="1308" r="3.75" fill="#212529" stroke="#9aa0a6" stroke-width="1"/>
+<circle cx="609" cy="1418" r="3.75" fill="#212529" stroke="#9aa0a6" stroke-width="1"/>
+<path d="M 581 1382 L 682 1382 L 682 2010 L 581 2010 L 581 1992" fill="none" stroke="#0a0b0f" stroke-width="6.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 581 1382 L 682 1382 L 682 2010 L 581 2010 L 581 1992" fill="none" stroke="#e03131" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="581" cy="1992" r="3.75" fill="#e03131" stroke="#0a0b0f" stroke-width="1"/>
+<circle cx="581" cy="1382" r="5" fill="#e03131" stroke="#0a0b0f" stroke-width="1.5"/>
+<path d="M 609 1372 L 696 1372 L 696 2024 L 609 2024 L 609 1992" fill="none" stroke="#9aa0a6" stroke-width="6.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 609 1372 L 696 1372 L 696 2024 L 609 2024 L 609 1992" fill="none" stroke="#212529" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="609" cy="1992" r="3.75" fill="#212529" stroke="#9aa0a6" stroke-width="1"/>
+<circle cx="609" cy="1372" r="5" fill="#868e96" stroke="#0a0b0f" stroke-width="1.5"/>
+<text x="140" y="2058" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#ffc078" text-anchor="start" font-weight="normal">Моторы одной стороны — параллельно.  На каждом моторе керамика 100 нФ (оранжевая).</text>
+<text x="140" y="2078" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#ffc078" text-anchor="start" font-weight="normal">Направление сторон задаётся в config.h (MOTOR_L/R_INVERT).  AO у энкодеров не подключать.  ШИМ 500 Гц.</text>
+<path d="M 521 1501 L 521 1528 L 561 1528" fill="none" stroke="#0a0b0f" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 521 1501 L 521 1528 L 561 1528" fill="none" stroke="#38d9a9" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="521" cy="1501" r="4.0" fill="#38d9a9" stroke="#0a0b0f" stroke-width="1"/>
+<rect x="561" y="1517" width="118" height="22" rx="11" fill="#101217" stroke="#38d9a9" stroke-width="2" />
+<text x="620" y="1533" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#38d9a9" text-anchor="middle" font-weight="bold">→ ESP GPIO2</text>
+<path d="M 330 246 L 442 246 L 760 246 L 760 504 L 1282 504" fill="none" stroke="#0a0b0f" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 330 246 L 442 246 L 760 246 L 760 504 L 1282 504" fill="none" stroke="#ff922b" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="330" cy="246" r="4.0" fill="#ff922b" stroke="#0a0b0f" stroke-width="1"/>
+<circle cx="1282" cy="504" r="4.0" fill="#ff922b" stroke="#0a0b0f" stroke-width="1"/>
+<path d="M 115 524 L 115 586 L 435 586 L 808 586 L 808 580 L 1282 580" fill="none" stroke="#0a0b0f" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 115 524 L 115 586 L 435 586 L 808 586 L 808 580 L 1282 580" fill="none" stroke="#51cf66" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="115" cy="524" r="4.0" fill="#51cf66" stroke="#0a0b0f" stroke-width="1"/>
+<circle cx="1282" cy="580" r="4.0" fill="#51cf66" stroke="#0a0b0f" stroke-width="1"/>
+<path d="M 145 524 L 145 572 L 435 572 L 784 572 L 784 542 L 1282 542" fill="none" stroke="#0a0b0f" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 145 524 L 145 572 L 435 572 L 784 572 L 784 542 L 1282 542" fill="none" stroke="#f1f3f5" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="145" cy="524" r="4.0" fill="#f1f3f5" stroke="#0a0b0f" stroke-width="1"/>
+<circle cx="1282" cy="542" r="4.0" fill="#f1f3f5" stroke="#0a0b0f" stroke-width="1"/>
+<path d="M 440 792 L 470 792 L 832 792 L 832 618 L 1282 618" fill="none" stroke="#0a0b0f" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 440 792 L 470 792 L 832 792 L 832 618 L 1282 618" fill="none" stroke="#ff8787" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="440" cy="792" r="4.0" fill="#ff8787" stroke="#0a0b0f" stroke-width="1"/>
+<circle cx="1282" cy="618" r="4.0" fill="#ff8787" stroke="#0a0b0f" stroke-width="1"/>
+<path d="M 440 812 L 470 812 L 856 812 L 856 656 L 1282 656" fill="none" stroke="#0a0b0f" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 440 812 L 470 812 L 856 812 L 856 656 L 1282 656" fill="none" stroke="#ffd43b" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="440" cy="812" r="4.0" fill="#ffd43b" stroke="#0a0b0f" stroke-width="1"/>
+<circle cx="1282" cy="656" r="4.0" fill="#ffd43b" stroke="#0a0b0f" stroke-width="1"/>
+<path d="M 440 1012 L 470 1012 L 880 1012 L 880 694 L 1282 694" fill="none" stroke="#0a0b0f" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 440 1012 L 470 1012 L 880 1012 L 880 694 L 1282 694" fill="none" stroke="#f06595" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="440" cy="1012" r="4.0" fill="#f06595" stroke="#0a0b0f" stroke-width="1"/>
+<circle cx="1282" cy="694" r="4.0" fill="#f06595" stroke="#0a0b0f" stroke-width="1"/>
+<path d="M 440 1032 L 470 1032 L 904 1032 L 904 732 L 1282 732" fill="none" stroke="#0a0b0f" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 440 1032 L 470 1032 L 904 1032 L 904 732 L 1282 732" fill="none" stroke="#c0eb75" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="440" cy="1032" r="4.0" fill="#c0eb75" stroke="#0a0b0f" stroke-width="1"/>
+<circle cx="1282" cy="732" r="4.0" fill="#c0eb75" stroke="#0a0b0f" stroke-width="1"/>
+<path d="M 310 1076 L 430 1076 L 928 1076 L 928 770 L 1282 770" fill="none" stroke="#0a0b0f" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 310 1076 L 430 1076 L 928 1076 L 928 770 L 1282 770" fill="none" stroke="#63e6be" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="310" cy="1076" r="4.0" fill="#63e6be" stroke="#0a0b0f" stroke-width="1"/>
+<circle cx="1282" cy="770" r="4.0" fill="#63e6be" stroke="#0a0b0f" stroke-width="1"/>
+<path d="M 300 1216 L 350 1216 L 1000 1216 L 1000 960 L 1282 960" fill="none" stroke="#0a0b0f" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 300 1216 L 350 1216 L 1000 1216 L 1000 960 L 1282 960" fill="none" stroke="#da77f2" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="300" cy="1216" r="4.0" fill="#da77f2" stroke="#0a0b0f" stroke-width="1"/>
+<circle cx="1282" cy="960" r="4.0" fill="#da77f2" stroke="#0a0b0f" stroke-width="1"/>
+<path d="M 300 1238 L 350 1238 L 1024 1238 L 1024 998 L 1282 998" fill="none" stroke="#0a0b0f" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 300 1238 L 350 1238 L 1024 1238 L 1024 998 L 1282 998" fill="none" stroke="#9775fa" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="300" cy="1238" r="4.0" fill="#9775fa" stroke="#0a0b0f" stroke-width="1"/>
+<circle cx="1282" cy="998" r="4.0" fill="#9775fa" stroke="#0a0b0f" stroke-width="1"/>
+<path d="M 300 1260 L 350 1260 L 952 1260 L 952 808 L 1282 808" fill="none" stroke="#0a0b0f" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 300 1260 L 350 1260 L 952 1260 L 952 808 L 1282 808" fill="none" stroke="#f783ac" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="300" cy="1260" r="4.0" fill="#f783ac" stroke="#0a0b0f" stroke-width="1"/>
+<circle cx="1282" cy="808" r="4.0" fill="#f783ac" stroke="#0a0b0f" stroke-width="1"/>
+<path d="M 300 1282 L 350 1282 L 976 1282 L 976 922 L 1282 922" fill="none" stroke="#0a0b0f" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 300 1282 L 350 1282 L 976 1282 L 976 922 L 1282 922" fill="none" stroke="#748ffc" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="300" cy="1282" r="4.0" fill="#748ffc" stroke="#0a0b0f" stroke-width="1"/>
+<circle cx="1282" cy="922" r="4.0" fill="#748ffc" stroke="#0a0b0f" stroke-width="1"/>
+<path d="M 287 1501 L 287 1546 L 667 1546 L 1048 1546 L 1048 1074 L 1282 1074" fill="none" stroke="#0a0b0f" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 287 1501 L 287 1546 L 667 1546 L 1048 1546 L 1048 1074 L 1282 1074" fill="none" stroke="#3bc9db" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="287" cy="1501" r="4.0" fill="#3bc9db" stroke="#0a0b0f" stroke-width="1"/>
+<circle cx="1282" cy="1074" r="4.0" fill="#3bc9db" stroke="#0a0b0f" stroke-width="1"/>
+<path d="M 287 1909 L 287 1838 L 667 1838 L 1072 1838 L 1072 1112 L 1282 1112" fill="none" stroke="#0a0b0f" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 287 1909 L 287 1838 L 667 1838 L 1072 1838 L 1072 1112 L 1282 1112" fill="none" stroke="#a5d8ff" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="287" cy="1909" r="4.0" fill="#a5d8ff" stroke="#0a0b0f" stroke-width="1"/>
+<circle cx="1282" cy="1112" r="4.0" fill="#a5d8ff" stroke="#0a0b0f" stroke-width="1"/>
+<rect x="1770" y="570" width="150" height="190" rx="6" fill="#5f3dc4" stroke="#36217a" stroke-width="2" />
+<circle cx="1898" cy="592" r="9" fill="#14161c" stroke="none" stroke-width="1"/>
+<circle cx="1898" cy="738" r="9" fill="#14161c" stroke="none" stroke-width="1"/>
+<rect x="1826" y="640" width="46" height="46" rx="3" fill="#212529" stroke="#495057" stroke-width="1" />
+<text x="1849" y="668" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="11" fill="#adb5bd" text-anchor="middle" font-weight="bold">MPU</text>
+<text x="1849" y="720" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="14" fill="#f8f9fa" text-anchor="middle" font-weight="bold">GY-521</text>
+<text x="1849" y="738" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="11" fill="#e5dbff" text-anchor="middle" font-weight="normal">MPU6050</text>
+<rect x="1765.5" y="585.5" width="9" height="9" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="1782" y="594" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="start" font-weight="bold">VCC</text>
+<rect x="1765.5" y="606.5" width="9" height="9" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="1782" y="615" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="start" font-weight="bold">GND</text>
+<rect x="1765.5" y="627.5" width="9" height="9" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="1782" y="636" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="start" font-weight="bold">SCL</text>
+<rect x="1765.5" y="648.5" width="9" height="9" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="1782" y="657" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="start" font-weight="bold">SDA</text>
+<rect x="1765.5" y="669.5" width="9" height="9" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="1782" y="678" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="start" font-weight="bold">XDA</text>
+<rect x="1765.5" y="690.5" width="9" height="9" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="1782" y="699" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="start" font-weight="bold">XCL</text>
+<rect x="1765.5" y="711.5" width="9" height="9" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="1782" y="720" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="start" font-weight="bold">AD0</text>
+<rect x="1765.5" y="732.5" width="9" height="9" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="1782" y="741" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="start" font-weight="bold">INT</text>
+<line x1="1756" y1="669" x2="1766" y2="679" stroke="#fa5252" stroke-width="2"/>
+<line x1="1766" y1="669" x2="1756" y2="679" stroke="#fa5252" stroke-width="2"/>
+<line x1="1756" y1="690" x2="1766" y2="700" stroke="#fa5252" stroke-width="2"/>
+<line x1="1766" y1="690" x2="1756" y2="700" stroke="#fa5252" stroke-width="2"/>
+<line x1="1756" y1="711" x2="1766" y2="721" stroke="#fa5252" stroke-width="2"/>
+<line x1="1766" y1="711" x2="1756" y2="721" stroke="#fa5252" stroke-width="2"/>
+<line x1="1756" y1="732" x2="1766" y2="742" stroke="#fa5252" stroke-width="2"/>
+<line x1="1766" y1="732" x2="1756" y2="742" stroke="#fa5252" stroke-width="2"/>
+<path d="M 1770 590 L 1730 590" fill="none" stroke="#0a0b0f" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 1770 590 L 1730 590" fill="none" stroke="#fcc419" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1770" cy="590" r="3.5" fill="#fcc419" stroke="#0a0b0f" stroke-width="1"/>
+<rect x="1689" y="579" width="41" height="22" rx="11" fill="#101217" stroke="#fcc419" stroke-width="2" />
+<text x="1709.5" y="595" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#fcc419" text-anchor="middle" font-weight="bold">3V3</text>
+<path d="M 1770 611 L 1750 611" fill="none" stroke="#0a0b0f" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 1770 611 L 1750 611" fill="none" stroke="#adb5bd" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1770" cy="611" r="3.5" fill="#adb5bd" stroke="#0a0b0f" stroke-width="1"/>
+<line x1="1750" y1="611" x2="1750" y2="619" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="1741" y1="619" x2="1759" y2="619" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="1744" y1="623" x2="1756" y2="623" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="1747" y1="627" x2="1753" y2="627" stroke="#adb5bd" stroke-width="2.5"/>
+<path d="M 1770 632 L 1645 632 L 1645 580 L 1578 580" fill="none" stroke="#0a0b0f" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 1770 632 L 1645 632 L 1645 580 L 1578 580" fill="none" stroke="#339af0" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1770" cy="632" r="4.0" fill="#339af0" stroke="#0a0b0f" stroke-width="1"/>
+<circle cx="1578" cy="580" r="4.0" fill="#339af0" stroke="#0a0b0f" stroke-width="1"/>
+<path d="M 1770 653 L 1620 653 L 1620 618 L 1578 618" fill="none" stroke="#0a0b0f" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 1770 653 L 1620 653 L 1620 618 L 1578 618" fill="none" stroke="#ffe066" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1770" cy="653" r="4.0" fill="#ffe066" stroke="#0a0b0f" stroke-width="1"/>
+<circle cx="1578" cy="618" r="4.0" fill="#ffe066" stroke="#0a0b0f" stroke-width="1"/>
+<text x="1770" y="558" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#adb5bd" text-anchor="start" font-weight="normal" font-style="italic">гироскоп: ровно, в центре шасси</text>
+<text x="1770" y="784" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#fa5252" text-anchor="start" font-weight="bold">XDA, XCL, AD0, INT —</text>
+<text x="1770" y="800" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#fa5252" text-anchor="start" font-weight="bold">не подключать</text>
+<text x="1770" y="818" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#adb5bd" text-anchor="start" font-weight="normal">адрес I2C 0x68</text>
+<path d="M 1578 504 L 1680 504" fill="none" stroke="#0a0b0f" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 1578 504 L 1680 504" fill="none" stroke="#d0bfff" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1578" cy="504" r="4.0" fill="#d0bfff" stroke="#0a0b0f" stroke-width="1"/>
+<circle cx="1680" cy="504" r="5" fill="#d0bfff" stroke="#0a0b0f" stroke-width="1.5"/>
+<path d="M 1680 504 L 1680 480" fill="none" stroke="#0a0b0f" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 1680 504 L 1680 480" fill="none" stroke="#d0bfff" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="1673" y="440" width="14" height="40" rx="6" fill="#e3c99a" stroke="#7d6640" stroke-width="1" />
+<rect x="1673" y="447" width="14" height="4" rx="0" fill="#8b4513" stroke="none" stroke-width="1" />
+<rect x="1673" y="455" width="14" height="4" rx="0" fill="#000" stroke="none" stroke-width="1" />
+<rect x="1673" y="463" width="14" height="4" rx="0" fill="#f08c00" stroke="none" stroke-width="1" />
+<text x="1694" y="465" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#f1f3f5" text-anchor="start" font-weight="bold">100 кОм</text>
+<path d="M 1680 440 L 1680 424 L 1710 424" fill="none" stroke="#0a0b0f" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 1680 440 L 1680 424 L 1710 424" fill="none" stroke="#e03131" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="1710" y="413" width="158" height="22" rx="11" fill="#101217" stroke="#e03131" stroke-width="2" />
+<text x="1789.0" y="429" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#e03131" text-anchor="middle" font-weight="bold">BAT+ после выкл.</text>
+<path d="M 1680 504 L 1740 504" fill="none" stroke="#0a0b0f" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 1680 504 L 1740 504" fill="none" stroke="#d0bfff" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="1740" y="497" width="40" height="14" rx="6" fill="#e3c99a" stroke="#7d6640" stroke-width="1" />
+<rect x="1747" y="497" width="4" height="14" rx="0" fill="#e03131" stroke="none" stroke-width="1" />
+<rect x="1755" y="497" width="4" height="14" rx="0" fill="#7d3cff" stroke="none" stroke-width="1" />
+<rect x="1763" y="497" width="4" height="14" rx="0" fill="#f08c00" stroke="none" stroke-width="1" />
+<text x="1760" y="530" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#f1f3f5" text-anchor="middle" font-weight="bold">27 кОм</text>
+<path d="M 1780 504 L 1796 504" fill="none" stroke="#0a0b0f" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 1780 504 L 1796 504" fill="none" stroke="#d0bfff" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<line x1="1796" y1="504" x2="1796" y2="512" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="1787" y1="512" x2="1805" y2="512" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="1790" y1="516" x2="1802" y2="516" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="1793" y1="520" x2="1799" y2="520" stroke="#adb5bd" stroke-width="2.5"/>
+<text x="1640" y="300" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#d0bfff" text-anchor="start" font-weight="bold">Батарея (опц., не установлен): 12.6→2.68 В</text>
+<path d="M 1578 542 L 1622 542" fill="none" stroke="#0a0b0f" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 1578 542 L 1622 542" fill="none" stroke="#38d9a9" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1578" cy="542" r="4.0" fill="#38d9a9" stroke="#0a0b0f" stroke-width="1"/>
+<rect x="1622" y="531" width="150" height="22" rx="11" fill="#101217" stroke="#38d9a9" stroke-width="2" />
+<text x="1697" y="547" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#38d9a9" text-anchor="middle" font-weight="bold">← энкодер FR (D0)</text>
+<path d="M 521 1909 L 521 1862 L 1700 1862 L 1700 1036 L 1578 1036" fill="none" stroke="#0a0b0f" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 521 1909 L 521 1862 L 1700 1862 L 1700 1036 L 1578 1036" fill="none" stroke="#96f2d7" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="521" cy="1909" r="4.0" fill="#96f2d7" stroke="#0a0b0f" stroke-width="1"/>
+<circle cx="1578" cy="1036" r="4.0" fill="#96f2d7" stroke="#0a0b0f" stroke-width="1"/>
+<rect x="1740" y="1340" width="1520" height="720" rx="18" fill="#171a21" stroke="#343a40" stroke-width="2" />
+<text x="1760" y="1374" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="24" fill="#f8f9fa" text-anchor="start" font-weight="bold">ПИТАНИЕ</text>
+<text x="1890" y="1374" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="15" fill="#ff8787" text-anchor="start" font-weight="bold">сначала выставить напряжения понижаек мультиметром, ПОТОМ подключать ESP</text>
+<rect x="1760" y="1420" width="270" height="176" rx="10" fill="#212529" stroke="#495057" stroke-width="2" />
+<rect x="1774" y="1432" width="210" height="44" rx="20" fill="#2b8a3e" stroke="#1b5e2a" stroke-width="2" />
+<rect x="1984" y="1445" width="8" height="18" rx="2" fill="#ced4da" stroke="#868e96" stroke-width="1" />
+<text x="1879" y="1460" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="15" fill="#ebfbee" text-anchor="middle" font-weight="bold">18650 · 3.7 В</text>
+<text x="1790" y="1460" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="16" fill="#f8f9fa" text-anchor="middle" font-weight="bold">−</text>
+<text x="1972" y="1460" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="16" fill="#f8f9fa" text-anchor="middle" font-weight="bold">+</text>
+<rect x="1774" y="1486" width="210" height="44" rx="20" fill="#2b8a3e" stroke="#1b5e2a" stroke-width="2" />
+<rect x="1984" y="1499" width="8" height="18" rx="2" fill="#ced4da" stroke="#868e96" stroke-width="1" />
+<text x="1879" y="1514" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="15" fill="#ebfbee" text-anchor="middle" font-weight="bold">18650 · 3.7 В</text>
+<text x="1790" y="1514" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="16" fill="#f8f9fa" text-anchor="middle" font-weight="bold">+</text>
+<text x="1972" y="1514" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="16" fill="#f8f9fa" text-anchor="middle" font-weight="bold">−</text>
+<rect x="1774" y="1540" width="210" height="44" rx="20" fill="#2b8a3e" stroke="#1b5e2a" stroke-width="2" />
+<rect x="1984" y="1553" width="8" height="18" rx="2" fill="#ced4da" stroke="#868e96" stroke-width="1" />
+<text x="1879" y="1568" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="15" fill="#ebfbee" text-anchor="middle" font-weight="bold">18650 · 3.7 В</text>
+<text x="1790" y="1568" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="16" fill="#f8f9fa" text-anchor="middle" font-weight="bold">−</text>
+<text x="1972" y="1568" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="16" fill="#f8f9fa" text-anchor="middle" font-weight="bold">+</text>
+<text x="1760" y="1620" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="14" fill="#b2f2bb" text-anchor="start" font-weight="bold">сборка 3S: 12.6 В полный · 11.1 В ном. · 9.0 В пусто</text>
+<text x="1760" y="1640" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#adb5bd" text-anchor="start" font-weight="normal" font-style="italic">прошивка остановит моторы при ~9.6 В</text>
+<rect x="2090" y="1420" width="120" height="176" rx="6" fill="#2f9e44" stroke="#1b5e2a" stroke-width="2" />
+<text x="2150" y="1516" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="16" fill="#f8f9fa" text-anchor="middle" font-weight="bold">BMS 3S</text>
+<rect x="2085.5" y="1437.5" width="9" height="9" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="2100" y="1446" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="11" fill="#f8f9fa" text-anchor="start" font-weight="bold">B−</text>
+<path d="M 2030 1442 L 2090 1442" fill="none" stroke="#9aa0a6" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 2030 1442 L 2090 1442" fill="none" stroke="#212529" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="2030" cy="1442" r="3.5" fill="#212529" stroke="#9aa0a6" stroke-width="1"/>
+<circle cx="2090" cy="1442" r="3.5" fill="#212529" stroke="#9aa0a6" stroke-width="1"/>
+<text x="2060" y="1434" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="10" fill="#adb5bd" text-anchor="middle" font-weight="normal">0 В</text>
+<rect x="2085.5" y="1481.5" width="9" height="9" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="2100" y="1490" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="11" fill="#f8f9fa" text-anchor="start" font-weight="bold">B1</text>
+<path d="M 2030 1486 L 2090 1486" fill="none" stroke="#0a0b0f" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 2030 1486 L 2090 1486" fill="none" stroke="#ffd43b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="2030" cy="1486" r="3.5" fill="#ffd43b" stroke="#0a0b0f" stroke-width="1"/>
+<circle cx="2090" cy="1486" r="3.5" fill="#ffd43b" stroke="#0a0b0f" stroke-width="1"/>
+<text x="2060" y="1478" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="10" fill="#adb5bd" text-anchor="middle" font-weight="normal">3.7 В</text>
+<rect x="2085.5" y="1525.5" width="9" height="9" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="2100" y="1534" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="11" fill="#f8f9fa" text-anchor="start" font-weight="bold">B2</text>
+<path d="M 2030 1530 L 2090 1530" fill="none" stroke="#0a0b0f" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 2030 1530 L 2090 1530" fill="none" stroke="#ffd43b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="2030" cy="1530" r="3.5" fill="#ffd43b" stroke="#0a0b0f" stroke-width="1"/>
+<circle cx="2090" cy="1530" r="3.5" fill="#ffd43b" stroke="#0a0b0f" stroke-width="1"/>
+<text x="2060" y="1522" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="10" fill="#adb5bd" text-anchor="middle" font-weight="normal">7.4 В</text>
+<rect x="2085.5" y="1569.5" width="9" height="9" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="2100" y="1578" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="11" fill="#f8f9fa" text-anchor="start" font-weight="bold">B+</text>
+<path d="M 2030 1574 L 2090 1574" fill="none" stroke="#0a0b0f" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 2030 1574 L 2090 1574" fill="none" stroke="#e03131" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="2030" cy="1574" r="3.5" fill="#e03131" stroke="#0a0b0f" stroke-width="1"/>
+<circle cx="2090" cy="1574" r="3.5" fill="#e03131" stroke="#0a0b0f" stroke-width="1"/>
+<text x="2060" y="1566" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="10" fill="#adb5bd" text-anchor="middle" font-weight="normal">11.1 В</text>
+<rect x="2205.5" y="1465.5" width="9" height="9" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="2198" y="1474" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="11" fill="#f8f9fa" text-anchor="end" font-weight="bold">P−</text>
+<rect x="2205.5" y="1541.5" width="9" height="9" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="2198" y="1550" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="11" fill="#f8f9fa" text-anchor="end" font-weight="bold">P+</text>
+<path d="M 2210 1546 L 2260 1546" fill="none" stroke="#0a0b0f" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 2210 1546 L 2260 1546" fill="none" stroke="#e03131" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="2210" cy="1546" r="4.5" fill="#e03131" stroke="#0a0b0f" stroke-width="1"/>
+<rect x="2260" y="1535" width="60" height="22" rx="10" fill="#e9ecef" stroke="#868e96" stroke-width="1.5" />
+<line x1="2266" y1="1546" x2="2314" y2="1546" stroke="#868e96" stroke-width="2"/>
+<text x="2290" y="1528" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#f1f3f5" text-anchor="middle" font-weight="normal">предохр. 5 А</text>
+<path d="M 2320 1546 L 2360 1546" fill="none" stroke="#0a0b0f" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 2320 1546 L 2360 1546" fill="none" stroke="#e03131" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="2360" y="1524" width="54" height="44" rx="6" fill="#212529" stroke="#868e96" stroke-width="2" />
+<rect x="2368" y="1530" width="38" height="32" rx="4" fill="#c92a2a" stroke="#7a1414" stroke-width="1" />
+<text x="2387" y="1551" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#f8f9fa" text-anchor="middle" font-weight="bold">I/O</text>
+<text x="2387" y="1586" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#f1f3f5" text-anchor="middle" font-weight="normal">выключатель</text>
+<path d="M 2414 1546 L 2450 1546" fill="none" stroke="#0a0b0f" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 2414 1546 L 2450 1546" fill="none" stroke="#e03131" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="2450" cy="1546" r="5" fill="#e03131" stroke="#0a0b0f" stroke-width="1.5"/>
+<rect x="2520" y="1410" width="230" height="120" rx="6" fill="#1971c2" stroke="#0b3d6b" stroke-width="2" />
+<circle cx="2670" cy="1470" r="32" fill="#343a40" stroke="#212529" stroke-width="2"/>
+<circle cx="2670" cy="1470" r="18" fill="#c9a227" stroke="none" stroke-width="1"/>
+<rect x="2570" y="1428" width="28" height="28" rx="2" fill="#212529" stroke="#495057" stroke-width="1" />
+<circle cx="2584" cy="1496" r="14" fill="#212529" stroke="#868e96" stroke-width="1"/>
+<text x="2584" y="1500" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="10" fill="#adb5bd" text-anchor="middle" font-weight="normal">C</text>
+<rect x="2612" y="1492" width="22" height="22" rx="2" fill="#1c7ed6" stroke="#a5d8ff" stroke-width="1" />
+<circle cx="2623" cy="1503" r="5" fill="#e9ecef" stroke="none" stroke-width="1"/>
+<text x="2635" y="1400" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="16" fill="#f8f9fa" text-anchor="middle" font-weight="bold">Понижайка 1 (LM2596)</text>
+<text x="2635" y="1556" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="17" fill="#ff6b6b" text-anchor="middle" font-weight="bold">5.0 В · ≥3 А</text>
+<text x="2635" y="1576" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#adb5bd" text-anchor="middle" font-weight="normal">подстроечником, без нагрузки</text>
+<rect x="2515.0" y="1439.0" width="10" height="10" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="2530" y="1448" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="start" font-weight="bold">IN+</text>
+<rect x="2515.0" y="1491.0" width="10" height="10" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="2530" y="1500" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="start" font-weight="bold">IN−</text>
+<rect x="2745.0" y="1439.0" width="10" height="10" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="2740" y="1448" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="end" font-weight="bold">OUT+</text>
+<rect x="2745.0" y="1491.0" width="10" height="10" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="2740" y="1500" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="end" font-weight="bold">OUT−</text>
+<rect x="2520" y="1690" width="230" height="120" rx="6" fill="#1971c2" stroke="#0b3d6b" stroke-width="2" />
+<circle cx="2670" cy="1750" r="32" fill="#343a40" stroke="#212529" stroke-width="2"/>
+<circle cx="2670" cy="1750" r="18" fill="#c9a227" stroke="none" stroke-width="1"/>
+<rect x="2570" y="1708" width="28" height="28" rx="2" fill="#212529" stroke="#495057" stroke-width="1" />
+<circle cx="2584" cy="1776" r="14" fill="#212529" stroke="#868e96" stroke-width="1"/>
+<text x="2584" y="1780" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="10" fill="#adb5bd" text-anchor="middle" font-weight="normal">C</text>
+<rect x="2612" y="1772" width="22" height="22" rx="2" fill="#1c7ed6" stroke="#a5d8ff" stroke-width="1" />
+<circle cx="2623" cy="1783" r="5" fill="#e9ecef" stroke="none" stroke-width="1"/>
+<text x="2635" y="1680" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="16" fill="#f8f9fa" text-anchor="middle" font-weight="bold">Понижайка 2 (≥3 А)</text>
+<text x="2635" y="1836" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="17" fill="#fd7e14" text-anchor="middle" font-weight="bold">9.0 В</text>
+<text x="2635" y="1856" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#adb5bd" text-anchor="middle" font-weight="normal">подстроечником, без нагрузки</text>
+<rect x="2515.0" y="1719.0" width="10" height="10" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="2530" y="1728" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="start" font-weight="bold">IN+</text>
+<rect x="2515.0" y="1771.0" width="10" height="10" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="2530" y="1780" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="start" font-weight="bold">IN−</text>
+<rect x="2745.0" y="1719.0" width="10" height="10" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="2740" y="1728" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="end" font-weight="bold">OUT+</text>
+<rect x="2745.0" y="1771.0" width="10" height="10" rx="1.5" fill="#d4af37" stroke="#7a5c00" stroke-width="1" />
+<text x="2740" y="1780" font-family="JetBrainsMono NF, Noto Sans Mono, monospace" font-size="10" fill="#f8f9fa" text-anchor="end" font-weight="bold">OUT−</text>
+<path d="M 2450 1546 L 2450 1444 L 2520 1444" fill="none" stroke="#0a0b0f" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 2450 1546 L 2450 1444 L 2520 1444" fill="none" stroke="#e03131" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="2520" cy="1444" r="4.5" fill="#e03131" stroke="#0a0b0f" stroke-width="1"/>
+<path d="M 2450 1546 L 2450 1724 L 2520 1724" fill="none" stroke="#0a0b0f" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 2450 1546 L 2450 1724 L 2520 1724" fill="none" stroke="#e03131" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="2520" cy="1724" r="4.5" fill="#e03131" stroke="#0a0b0f" stroke-width="1"/>
+<path d="M 2450 1724 L 2450 1784 L 2430 1784" fill="none" stroke="#0a0b0f" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 2450 1724 L 2450 1784 L 2430 1784" fill="none" stroke="#e03131" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="2272" y="1773" width="158" height="22" rx="11" fill="#101217" stroke="#e03131" stroke-width="2" />
+<text x="2351.0" y="1789" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#e03131" text-anchor="middle" font-weight="bold">→ делитель GPIO1</text>
+<path d="M 2210 1470 L 2240 1470 L 2240 1990 L 3220 1990" fill="none" stroke="#9aa0a6" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 2210 1470 L 2240 1470 L 2240 1990 L 3220 1990" fill="none" stroke="#212529" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="2210" cy="1470" r="4.5" fill="#212529" stroke="#9aa0a6" stroke-width="1"/>
+<path d="M 2520 1496 L 2490 1496 L 2490 1990" fill="none" stroke="#9aa0a6" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 2520 1496 L 2490 1496 L 2490 1990" fill="none" stroke="#212529" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="2520" cy="1496" r="3.5" fill="#212529" stroke="#9aa0a6" stroke-width="1"/>
+<circle cx="2490" cy="1990" r="5" fill="#868e96" stroke="#0a0b0f" stroke-width="1.5"/>
+<path d="M 2520 1776 L 2490 1776 L 2490 1990" fill="none" stroke="#9aa0a6" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 2520 1776 L 2490 1776 L 2490 1990" fill="none" stroke="#212529" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="2520" cy="1776" r="3.5" fill="#212529" stroke="#9aa0a6" stroke-width="1"/>
+<path d="M 2750 1496 L 2770 1496 L 2770 1990" fill="none" stroke="#9aa0a6" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 2750 1496 L 2770 1496 L 2770 1990" fill="none" stroke="#212529" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="2750" cy="1496" r="3.5" fill="#212529" stroke="#9aa0a6" stroke-width="1"/>
+<circle cx="2770" cy="1990" r="5" fill="#868e96" stroke="#0a0b0f" stroke-width="1.5"/>
+<path d="M 2750 1776 L 2770 1776 L 2770 1990" fill="none" stroke="#9aa0a6" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 2750 1776 L 2770 1776 L 2770 1990" fill="none" stroke="#212529" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="2750" cy="1776" r="3.5" fill="#212529" stroke="#9aa0a6" stroke-width="1"/>
+<circle cx="2770" cy="1990" r="5" fill="#868e96" stroke="#0a0b0f" stroke-width="1.5"/>
+<line x1="3220" y1="1990" x2="3220" y2="1998" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="3211" y1="1998" x2="3229" y2="1998" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="3214" y1="2002" x2="3226" y2="2002" stroke="#adb5bd" stroke-width="2.5"/>
+<line x1="3217" y1="2006" x2="3223" y2="2006" stroke="#adb5bd" stroke-width="2.5"/>
+<text x="2260" y="1978" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="14" fill="#ced4da" text-anchor="start" font-weight="bold">ОБЩАЯ ЗЕМЛЯ: батарея (P−), обе понижайки, ESP GND, MX1508 −, все датчики, серва</text>
+<path d="M 2750 1444 L 2820 1444" fill="none" stroke="#0a0b0f" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 2750 1444 L 2820 1444" fill="none" stroke="#ff6b6b" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="2750" cy="1444" r="4.5" fill="#ff6b6b" stroke="#0a0b0f" stroke-width="1"/>
+<circle cx="2820" cy="1444" r="5" fill="#ff6b6b" stroke="#0a0b0f" stroke-width="1.5"/>
+<path d="M 2820 1444 L 2820 1414 L 2890 1414" fill="none" stroke="#0a0b0f" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 2820 1444 L 2820 1414 L 2890 1414" fill="none" stroke="#ff6b6b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="2890" y="1403" width="167" height="22" rx="11" fill="#101217" stroke="#ff6b6b" stroke-width="2" />
+<text x="2973.5" y="1419" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#ff6b6b" text-anchor="middle" font-weight="bold">→ серва (красный)</text>
+<path d="M 2820 1444 L 2890 1444" fill="none" stroke="#0a0b0f" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 2820 1444 L 2890 1444" fill="none" stroke="#ff6b6b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="2890" y="1433" width="230" height="22" rx="11" fill="#101217" stroke="#ff6b6b" stroke-width="2" />
+<text x="3005.0" y="1449" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#ff6b6b" text-anchor="middle" font-weight="bold">→ HC-SR04 ×2 + HW-209 HV</text>
+<path d="M 2820 1444 L 2820 1494" fill="none" stroke="#0a0b0f" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 2820 1444 L 2820 1494" fill="none" stroke="#ff6b6b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 2820 1494 L 2850 1494" fill="none" stroke="#0a0b0f" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 2820 1494 L 2850 1494" fill="none" stroke="#ff6b6b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="2850,1482 2850,1506 2872,1494" fill="#adb5bd" stroke="#f8f9fa" stroke-width="1"/>
+<line x1="2874" y1="1482" x2="2874" y2="1506" stroke="#f8f9fa" stroke-width="3"/>
+<text x="2862" y="1524" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#f1f3f5" text-anchor="middle" font-weight="bold">SS34</text>
+<path d="M 2876 1494 L 2910 1494" fill="none" stroke="#0a0b0f" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 2876 1494 L 2910 1494" fill="none" stroke="#ff6b6b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="2910" y="1483" width="158" height="22" rx="11" fill="#101217" stroke="#ff6b6b" stroke-width="2" />
+<text x="2989.0" y="1499" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#ff6b6b" text-anchor="middle" font-weight="bold">→ ESP контакт 5V</text>
+<text x="2810" y="1544" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#ffa8a8" text-anchor="start" font-weight="normal" font-style="italic">нет диода → при подключении USB снимать провод 5V к ESP (GND оставить)</text>
+<rect x="2954" y="1528" width="32" height="52" rx="6" fill="#1c1e3a" stroke="#5c7cfa" stroke-width="2" />
+<rect x="2976" y="1528" width="8" height="52" rx="2" fill="#748ffc" stroke="none" stroke-width="1" />
+<text x="2996" y="1548" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#f1f3f5" text-anchor="start" font-weight="bold">1000 мкФ 16 В</text>
+<text x="2996" y="1566" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="12" fill="#adb5bd" text-anchor="start" font-weight="normal">у разъёма сервы: + к 5V, − к GND</text>
+<path d="M 2750 1724 L 2820 1724" fill="none" stroke="#0a0b0f" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 2750 1724 L 2820 1724" fill="none" stroke="#fd7e14" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="2750" cy="1724" r="4.5" fill="#fd7e14" stroke="#0a0b0f" stroke-width="1"/>
+<rect x="2820" y="1713" width="113" height="22" rx="11" fill="#101217" stroke="#fd7e14" stroke-width="2" />
+<text x="2876.5" y="1729" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="13" fill="#fd7e14" text-anchor="middle" font-weight="bold">→ MX1508  +</text>
+<rect x="1990" y="170" width="1280" height="1160" rx="18" fill="#171a21" stroke="#343a40" stroke-width="2" />
+<text x="2020" y="214" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="26" fill="#ff8787" text-anchor="start" font-weight="bold">ВАЖНО</text>
+<circle cx="2036" cy="257" r="15" fill="#c92a2a" stroke="none" stroke-width="1"/>
+<text x="2036" y="263" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="15" fill="#f8f9fa" text-anchor="middle" font-weight="bold">1</text>
+<text x="2064" y="264" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="19" fill="#e9ecef" text-anchor="start" font-weight="normal">Понижайки выставить ДО подключения ESP: 5.0 В и 9.0 В (мультиметр).</text>
+<circle cx="2036" cy="293" r="15" fill="#c92a2a" stroke="none" stroke-width="1"/>
+<text x="2036" y="299" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="15" fill="#f8f9fa" text-anchor="middle" font-weight="bold">2</text>
+<text x="2064" y="300" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="19" fill="#e9ecef" text-anchor="start" font-weight="normal">Все GND соединены вместе — без этого ничего не заработает.</text>
+<circle cx="2036" cy="329" r="15" fill="#c92a2a" stroke="none" stroke-width="1"/>
+<text x="2036" y="335" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="15" fill="#f8f9fa" text-anchor="middle" font-weight="bold">3</text>
+<text x="2064" y="336" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="19" fill="#e9ecef" text-anchor="start" font-weight="normal">Керамика 100 нФ на выводы КАЖДОГО мотора — иначе помехи и перезагрузки.</text>
+<circle cx="2036" cy="365" r="15" fill="#c92a2a" stroke="none" stroke-width="1"/>
+<text x="2036" y="371" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="15" fill="#f8f9fa" text-anchor="middle" font-weight="bold">4</text>
+<text x="2064" y="372" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="19" fill="#e9ecef" text-anchor="start" font-weight="normal">HC-SR04 (5 В) ↔ ESP (3.3 В) — через HW-209: LV=3V3, HV=5V.</text>
+<circle cx="2036" cy="401" r="15" fill="#c92a2a" stroke="none" stroke-width="1"/>
+<text x="2036" y="407" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="15" fill="#f8f9fa" text-anchor="middle" font-weight="bold">5</text>
+<text x="2064" y="408" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="19" fill="#e9ecef" text-anchor="start" font-weight="normal">TOF, MPU, энкодеры, ИК — питать от 3V3 ESP (сигналы будут 3.3 В).</text>
+<circle cx="2036" cy="437" r="15" fill="#c92a2a" stroke="none" stroke-width="1"/>
+<text x="2036" y="443" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="15" fill="#f8f9fa" text-anchor="middle" font-weight="bold">6</text>
+<text x="2064" y="444" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="19" fill="#e9ecef" text-anchor="start" font-weight="normal">SS34 перед ESP 5V. Нет диода → при USB снять провод 5V к ESP.</text>
+<circle cx="2036" cy="473" r="15" fill="#c92a2a" stroke="none" stroke-width="1"/>
+<text x="2036" y="479" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="15" fill="#f8f9fa" text-anchor="middle" font-weight="bold">7</text>
+<text x="2064" y="480" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="19" fill="#e9ecef" text-anchor="start" font-weight="normal">Конденсатор 1000 мкФ у сервы, иначе ESP сбрасывается при рывках.</text>
+<circle cx="2036" cy="509" r="15" fill="#c92a2a" stroke="none" stroke-width="1"/>
+<text x="2036" y="515" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="15" fill="#f8f9fa" text-anchor="middle" font-weight="bold">8</text>
+<text x="2064" y="516" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="19" fill="#e9ecef" text-anchor="start" font-weight="normal">Не занимать GPIO 0, 3, 45, 46, 35–37, 19/20. GPIO12 — свободен.</text>
+<circle cx="2036" cy="545" r="15" fill="#c92a2a" stroke="none" stroke-width="1"/>
+<text x="2036" y="551" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="15" fill="#f8f9fa" text-anchor="middle" font-weight="bold">9</text>
+<text x="2064" y="552" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="19" fill="#e9ecef" text-anchor="start" font-weight="normal">TOF400F: SDA и SCL не подключать. MPU: XDA, XCL, AD0, INT не подключать.</text>
+<circle cx="2036" cy="581" r="15" fill="#c92a2a" stroke="none" stroke-width="1"/>
+<text x="2036" y="587" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="15" fill="#f8f9fa" text-anchor="middle" font-weight="bold">10</text>
+<text x="2064" y="588" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="19" fill="#e9ecef" text-anchor="start" font-weight="normal">Модули — на разъёмах (гнёзда/Dupont), чтобы можно было снять и проверить.</text>
+<circle cx="2036" cy="617" r="15" fill="#c92a2a" stroke="none" stroke-width="1"/>
+<text x="2036" y="623" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="15" fill="#f8f9fa" text-anchor="middle" font-weight="bold">11</text>
+<text x="2064" y="624" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="19" fill="#e9ecef" text-anchor="start" font-weight="normal">Провода моторов — подальше от I2C и энкодеров, пары скрутить.</text>
+<text x="2020" y="678" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="26" fill="#74c0fc" text-anchor="start" font-weight="bold">ПАРАМЕТРЫ</text>
+<rect x="2020" y="701" width="1220" height="31" rx="4" fill="#1d2129" stroke="none" stroke-width="1" />
+<text x="2032" y="724" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="18" fill="#a5d8ff" text-anchor="start" font-weight="bold">Батарея 3S 18650</text>
+<text x="2390" y="724" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="18" fill="#e9ecef" text-anchor="start" font-weight="normal">12.6 полн. / 11.1 ном. / 9.0 В пусто</text>
+<rect x="2020" y="733" width="1220" height="31" rx="4" fill="#171a21" stroke="none" stroke-width="1" />
+<text x="2032" y="756" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="18" fill="#a5d8ff" text-anchor="start" font-weight="bold">Понижайка 1</text>
+<text x="2390" y="756" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="18" fill="#e9ecef" text-anchor="start" font-weight="normal">5.0 В ≥3 А → ESP (SS34), серва, HC-SR04</text>
+<rect x="2020" y="765" width="1220" height="31" rx="4" fill="#1d2129" stroke="none" stroke-width="1" />
+<text x="2032" y="788" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="18" fill="#a5d8ff" text-anchor="start" font-weight="bold">Понижайка 2</text>
+<text x="2390" y="788" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="18" fill="#e9ecef" text-anchor="start" font-weight="normal">9.0 В → MX1508 (моторы, предел MX1508 — 10 В)</text>
+<rect x="2020" y="797" width="1220" height="31" rx="4" fill="#171a21" stroke="none" stroke-width="1" />
+<text x="2032" y="820" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="18" fill="#a5d8ff" text-anchor="start" font-weight="bold">MX1508</text>
+<text x="2390" y="820" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="18" fill="#e9ecef" text-anchor="start" font-weight="normal">2–10 В · 1.5 А/канал (пик 2.5 А)</text>
+<rect x="2020" y="829" width="1220" height="31" rx="4" fill="#1d2129" stroke="none" stroke-width="1" />
+<text x="2032" y="852" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="18" fill="#a5d8ff" text-anchor="start" font-weight="bold">TT-мотор</text>
+<text x="2390" y="852" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="18" fill="#e9ecef" text-anchor="start" font-weight="normal">ШИМ 500 Гц · трогается с ~22% · ≤75% от 9 В</text>
+<rect x="2020" y="861" width="1220" height="31" rx="4" fill="#171a21" stroke="none" stroke-width="1" />
+<text x="2032" y="884" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="18" fill="#a5d8ff" text-anchor="start" font-weight="bold">Колесо 65 мм</text>
+<text x="2390" y="884" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="18" fill="#e9ecef" text-anchor="start" font-weight="normal">окружность ≈ 204 мм</text>
+<rect x="2020" y="893" width="1220" height="31" rx="4" fill="#1d2129" stroke="none" stroke-width="1" />
+<text x="2032" y="916" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="18" fill="#a5d8ff" text-anchor="start" font-weight="bold">Энкодер, диск 20 щелей</text>
+<text x="2390" y="916" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="18" fill="#e9ecef" text-anchor="start" font-weight="normal">10.2 мм/щель · 5.1 мм/фронт</text>
+<rect x="2020" y="925" width="1220" height="31" rx="4" fill="#171a21" stroke="none" stroke-width="1" />
+<text x="2032" y="948" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="18" fill="#a5d8ff" text-anchor="start" font-weight="bold">TOF400F</text>
+<text x="2390" y="948" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="18" fill="#e9ecef" text-anchor="start" font-weight="normal">3.3 В · UART 115200 Modbus · 4 см…4 м</text>
+<rect x="2020" y="957" width="1220" height="31" rx="4" fill="#1d2129" stroke="none" stroke-width="1" />
+<text x="2032" y="980" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="18" fill="#a5d8ff" text-anchor="start" font-weight="bold">MPU6050 (GY-521)</text>
+<text x="2390" y="980" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="18" fill="#e9ecef" text-anchor="start" font-weight="normal">3.3 В · I2C 0x68 · гироскоп ±250°/с</text>
+<rect x="2020" y="989" width="1220" height="31" rx="4" fill="#171a21" stroke="none" stroke-width="1" />
+<text x="2032" y="1012" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="18" fill="#a5d8ff" text-anchor="start" font-weight="bold">HC-SR04</text>
+<text x="2390" y="1012" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="18" fill="#e9ecef" text-anchor="start" font-weight="normal">5 В · 2–400 см · Trig 20 мкс · по очереди</text>
+<rect x="2020" y="1021" width="1220" height="31" rx="4" fill="#1d2129" stroke="none" stroke-width="1" />
+<text x="2032" y="1044" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="18" fill="#a5d8ff" text-anchor="start" font-weight="bold">SG90</text>
+<text x="2390" y="1044" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="18" fill="#e9ecef" text-anchor="start" font-weight="normal">5 В · 50 Гц · импульс 500–2400 мкс</text>
+<rect x="2020" y="1053" width="1220" height="31" rx="4" fill="#171a21" stroke="none" stroke-width="1" />
+<text x="2032" y="1076" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="18" fill="#a5d8ff" text-anchor="start" font-weight="bold">Делитель батареи</text>
+<text x="2390" y="1076" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="18" fill="#e9ecef" text-anchor="start" font-weight="normal">опц. 100k/27k: 12.6 В → 2.68 В</text>
+<rect x="2020" y="1085" width="1220" height="31" rx="4" fill="#1d2129" stroke="none" stroke-width="1" />
+<text x="2032" y="1108" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="18" fill="#a5d8ff" text-anchor="start" font-weight="bold">Нагрузка 3V3 ESP</text>
+<text x="2390" y="1108" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="18" fill="#e9ecef" text-anchor="start" font-weight="normal">≈100–150 мА (запас большой)</text>
+<text x="2020" y="1160" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="26" fill="#ffd43b" text-anchor="start" font-weight="bold">ЦВЕТА</text>
+<line x1="2140" y1="1153" x2="2174" y2="1153" stroke="#e03131" stroke-width="6"/>
+<text x="2182" y="1159" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="14" fill="#e9ecef" text-anchor="start" font-weight="normal">12.6 В батарея</text>
+<line x1="2318" y1="1153" x2="2352" y2="1153" stroke="#fd7e14" stroke-width="6"/>
+<text x="2360" y="1159" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="14" fill="#e9ecef" text-anchor="start" font-weight="normal">9 В моторы</text>
+<line x1="2460" y1="1153" x2="2494" y2="1153" stroke="#ff6b6b" stroke-width="6"/>
+<text x="2502" y="1159" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="14" fill="#e9ecef" text-anchor="start" font-weight="normal">5 В</text>
+<line x1="2539" y1="1153" x2="2573" y2="1153" stroke="#fcc419" stroke-width="6"/>
+<text x="2581" y="1159" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="14" fill="#e9ecef" text-anchor="start" font-weight="normal">3.3 В</text>
+<line x1="2636" y1="1153" x2="2670" y2="1153" stroke="#adb5bd" stroke-width="6"/>
+<text x="2678" y="1159" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="14" fill="#e9ecef" text-anchor="start" font-weight="normal">земля</text>
+<line x1="2140" y1="1183" x2="2174" y2="1183" stroke="#e03131" stroke-width="5"/>
+<line x1="2180" y1="1183" x2="2214" y2="1183" stroke="#212529" stroke-width="5"/>
+<text x="2222" y="1189" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="14" fill="#e9ecef" text-anchor="start" font-weight="normal">провода моторов</text>
+<text x="2390" y="1189" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="14" fill="#adb5bd" text-anchor="start" font-weight="normal">остальные цвета — сигналы, у каждого свой; подписи на ESP совпадают по цвету</text>
+<text x="2020" y="1236" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="22" fill="#69db7c" text-anchor="start" font-weight="bold">ПОРЯДОК ПРОВЕРКИ</text>
+<text x="2020" y="1266" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="17" fill="#e9ecef" text-anchor="start" font-weight="normal">0 понижайки → 1 ESP от батареи → 2 замер батареи → 3 TOF + серва → 4 MPU → 5 ультразвук</text>
+<text x="2020" y="1292" font-family="Noto Sans, Liberation Sans, sans-serif" font-size="17" fill="#e9ecef" text-anchor="start" font-weight="normal">→ 6 ИК пола → 7 энкодеры (крутить рукой) → 8 моторы (КОЛЁСА В ВОЗДУХЕ!)</text>
+</svg>
